@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
+import { IoMenu } from 'react-icons/io5';
 import { IoRestaurantOutline } from "react-icons/io5";
 export default function SideBar() {
   return (
@@ -70,8 +71,11 @@ export default function SideBar() {
             <Sidebar.Item href="#" icon={HiInbox}>
               <Link to="/categories">Categories</Link>
             </Sidebar.Item>
-            <Sidebar.Item href="#" icon={HiUser}>
-              Users
+            <Sidebar.Item  icon={HiUser}>
+              <Link to="/profile">Profile</Link>
+            </Sidebar.Item>
+            <Sidebar.Item  icon={IoMenu}>
+              <Link to="/menu">menu</Link>
             </Sidebar.Item>
             <Sidebar.Item href="#" icon={HiShoppingBag}>
               Products

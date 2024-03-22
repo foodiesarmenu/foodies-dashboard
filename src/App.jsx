@@ -5,7 +5,6 @@ import Layout from "./components/Layout/Layout";
 import Home from "./components/Home/Home";
 import OrderList from "./components/OrderList/OrderList";
 import OrderDetails from "./components/OrderDetails/OrderDetails";
-import Customer from "./components/Customer/Customer";
 import Analytics from "./components/Analytics/Analytics";
 import Wallet from "./components/Wallet/Wallet";
 import NotFound from "./components/NotFound/notFound";
@@ -14,6 +13,8 @@ import SignUp from "./components/SignUp/SignUp";
 import ProtectedRoutes from "./components/ProtectedRoutes/ProtectedRoutes";
 import Restaurants from "./components/Restaurants/Restaurants";
 import Category from "./components/Category/Category";
+import Profile from "./components/Profile/Profile";
+import Menu from "./components/Menu/Menu";
 
 let routers = createBrowserRouter([
   {
@@ -43,9 +44,15 @@ let routers = createBrowserRouter([
           </ProtectedRoutes>
       },
       {
-        path: 'Customer', element:
+        path: 'Profile', element:
           <ProtectedRoutes>
-            <Customer />
+            <Profile />
+          </ProtectedRoutes>
+      },
+      {
+        path: 'menu', element:
+          <ProtectedRoutes>
+            <Menu />
           </ProtectedRoutes>
       },
       {

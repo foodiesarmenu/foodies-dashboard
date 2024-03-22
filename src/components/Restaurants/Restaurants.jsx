@@ -24,6 +24,7 @@ export default function Restaurants() {
                 }
             });
             setRestaurants(data.data);
+            console.log(data.data);
             setCurrentPage(data.currentPage);
             setNumberOfPages(data.numberOfPages);
             console.log(data);
