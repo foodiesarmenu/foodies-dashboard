@@ -5,10 +5,7 @@ import {
   Button,
   Label,
   TextInput,
-  ToggleSwitch,
   Toast,
-  Datepicker,
-  Dropdown,
   Select,
 } from "flowbite-react";
 import { HiPencil, HiOutlineCheck, HiCheck } from "react-icons/hi";
@@ -32,7 +29,7 @@ export default function Profile() {
       const decodedToken = jwtDecode(token);
       const email = decodedToken.email;
       const { data } = await axios.get(
-        `http://localhost:4000/dashboard/admin/Abdo@gmail.com`,
+        `https://foodies-backend-1.onrender.com/dashboard/admin/Abdo@gmail.com`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -47,32 +44,31 @@ export default function Profile() {
       setIsLoading(false);
     }
   };
-
-  // wait for the API Creation
-  // const updateProfile = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const { data } = await axios.patch(
-  //       `https://foodies-backend-1.onrender.com/dashboard/admin/restaurant`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //         },
-  //       }
-  //     );
-  //     console.log(data, "changed");
-  //     setShowSuccessToast(true);
-  //     setTimeout(() => setShowSuccessToast(false), 5000);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setIsLoading(false);
-  //     setShowErrorToast(true);
-  //     setTimeout(() => setShowErrorToast(false), 5000);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+// need update Admin API
+  const updateProfile = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.patch(
+        `https://foodies-backend-1.onrender.com/dashboard/admin/restaurant`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      console.log(data, "changed");
+      setShowSuccessToast(true);
+      setTimeout(() => setShowSuccessToast(false), 5000);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+      setShowErrorToast(true);
+      setTimeout(() => setShowErrorToast(false), 5000);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchProfile();
@@ -143,7 +139,7 @@ export default function Profile() {
             onClick={() => {
               setIsDisabled(!isDisabled);
               if (!isDisabled) {
-            //    updateProfile();
+                updateProfile();
               }
             }}
           >
@@ -187,14 +183,18 @@ export default function Profile() {
           <Label className="text-white text-xl" htmlFor="genderSelect">
             Gender
           </Label>
-          <Select  disabled={isDisabled}  label={formData.gender} value={formData.gender}
-          onChange={(e) =>
-            setFormData({ ...formData, gender: e.target.value })
-          } dismissOnClick={false}>
+          <Select
+            disabled={isDisabled}
+            label={formData.gender}
+            value={formData.gender}
+            onChange={(e) =>
+              setFormData({ ...formData, gender: e.target.value })
+            }
+            dismissOnClick={false}
+          >
             <option>Male</option>
             <option>Female</option>
-          </Select >
-          
+          </Select>
         </div>
       </div>
     </>
