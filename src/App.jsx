@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Home from "./components/Home/Home";
@@ -15,72 +15,80 @@ import Restaurants from "./components/Restaurants/Restaurants";
 import Category from "./components/Category/Category";
 import Profile from "./components/Profile/Profile";
 import Menu from "./components/Menu/Menu";
+import { jwtDecode } from "jwt-decode";
+import TokenContext from "./Context/userContext";
 
-let routers = createBrowserRouter([
-  {
-    path: '', element: <Layout />, children: [
-      {
-        index: true, element:
-          <ProtectedRoutes>
-            <Home />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'OrderList', element:
-          <ProtectedRoutes>
-            <OrderList />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'restaurants', element:
-          <ProtectedRoutes>
-            <Restaurants />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'OrderDetails', element:
-          <ProtectedRoutes>
-            <OrderDetails />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'Profile', element:
-          <ProtectedRoutes>
-            <Profile />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'menu', element:
-          <ProtectedRoutes>
-            <Menu />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'Analytics', element:
-          <ProtectedRoutes>
-            <Analytics />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'Wallet', element:
-          <ProtectedRoutes>
-            <Wallet />
-          </ProtectedRoutes>
-      },
-      {
-        path: 'categories', element:
-          <ProtectedRoutes>
-            <Category />
-          </ProtectedRoutes>
-      },
-      { path: "*", element: <NotFound /> }
-    ]
-  },
-  { path: 'login', element: <LogIn /> },
-  { path: 'signUp', element: <SignUp /> },
-]);
 
-function App() {
+export default function App() {
+
+
+
+  let routers = createBrowserRouter([
+    {
+      path: '', element: <Layout />, children: [
+        {
+          index: true, element:
+            <ProtectedRoutes>
+              <Home />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'OrderList', element:
+            <ProtectedRoutes>
+              <OrderList />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'restaurants', element:
+            <ProtectedRoutes>
+              <Restaurants />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'OrderDetails', element:
+            <ProtectedRoutes>
+              <OrderDetails />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'Profile', element:
+            <ProtectedRoutes>
+              <Profile />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'menu', element:
+            <ProtectedRoutes>
+              <Menu />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'Analytics', element:
+            <ProtectedRoutes>
+              <Analytics />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'Wallet', element:
+            <ProtectedRoutes>
+              <Wallet />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'categories', element:
+            <ProtectedRoutes>
+              <Category />
+            </ProtectedRoutes>
+        },
+        { path: "*", element: <NotFound /> }
+      ]
+    },
+    { path: 'login', element: <LogIn /> },
+    { path: 'signUp', element: <SignUp /> },
+  ]);
+
+
+
   return (
     <>
       <RouterProvider router={routers} ></RouterProvider>
@@ -88,4 +96,3 @@ function App() {
   );
 }
 
-export default App;

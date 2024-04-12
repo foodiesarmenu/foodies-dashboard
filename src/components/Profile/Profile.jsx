@@ -44,7 +44,7 @@ export default function Profile() {
       setIsLoading(false);
     }
   };
-// need update Admin API
+  // need update Admin API
   const updateProfile = async () => {
     try {
       setIsLoading(true);

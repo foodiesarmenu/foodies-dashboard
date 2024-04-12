@@ -24,10 +24,10 @@ export default function Restaurants() {
                 }
             });
             setRestaurants(data.data);
-            console.log(data.data);
+            // console.log(data.data);
             setCurrentPage(data.currentPage);
             setNumberOfPages(data.numberOfPages);
-            console.log(data);
+            // console.log(data);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -43,7 +43,7 @@ export default function Restaurants() {
                 }
             });
             setCategories(data.data);
-            console.log(data);
+            // console.log(data);
         } catch (error) {
             console.log(error);
         }

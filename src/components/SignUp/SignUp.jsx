@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Datepicker, Label, TextInput } from 'flowbite-react';
+import { Button, Checkbox, Datepicker, Label, TextInput, Toast } from 'flowbite-react';
 import { HiMail } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-
 function SignUp() {
     const [isLoading, setIsLoading] = useState(false);
     const [apiError, setApiError] = useState('');
+    const [imageFile, setImageFile] = useState(null); // New state variable for the image file
+
     const navigate = useNavigate();
 
     const register = async (values) => {
         setIsLoading(true);
         setApiError('');
+        const formData = new FormData();
+        Object.keys(values).forEach(key => {
+            formData.append(key, values[key]);
+        });
+        formData.append('image', imageFile);
         try {
-            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/admin', values);
+            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/admin', formData);
             setIsLoading(false);
 
             if (data.success === true)
@@ -61,6 +67,19 @@ function SignUp() {
             <div className="flex flex-col justify-center px-4 lg:px-8 w-full max-w-md m-auto">
                 <h1 className="text-3xl font-bold mb-6">Register</h1>
                 <form onSubmit={formik.handleSubmit}>
+
+
+                    <div className="mb-4 ">
+                        <label className="text-gray-700 block mb-2" htmlFor="image">
+                            Image
+                        </label>
+                        <input
+                            id="image"
+                            type="file"
+                            className="w-64"
+                            onChange={(event) => setImageFile(event.currentTarget.files[0])}
+                        />
+                    </div>
                     <div className="mb-4">
                         <label className="text-gray-700 block mb-2" htmlFor="name">
                             Name

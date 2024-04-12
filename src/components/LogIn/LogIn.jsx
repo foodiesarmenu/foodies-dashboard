@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, TextInput } from 'flowbite-react';
 import { HiMail } from 'react-icons/hi';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import TokenContext from '../../Context/userContext';
+import { Bounce, toast } from 'react-toastify';
 export default function LogIn() {
-
+    const { setUser } = useContext(TokenContext);
     const [isLoading, setIsLoading] = useState(false);
     const [apiError, setApiError] = useState('');
     const navigate = useNavigate();
-
+  
     const register = async (values) => {
         setIsLoading(true);
         setApiError('');
@@ -21,6 +23,7 @@ export default function LogIn() {
             if (data) {
                 setIsLoading(false)
                 localStorage.setItem('accessToken', data.accessToken)
+                setUser(data.user)
                 navigate('/')
             }
         } catch (error) {

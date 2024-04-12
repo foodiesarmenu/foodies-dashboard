@@ -6,13 +6,14 @@ import App from './App';
 // import 'bootstrap/dist/js/bootstrap.bundle.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import reportWebVitals from './reportWebVitals';
+import { TokenContextProvider } from './Context/userContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <TokenContextProvider>
+        <App />
+    </TokenContextProvider>
+
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
