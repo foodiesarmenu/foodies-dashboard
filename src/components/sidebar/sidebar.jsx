@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
+import { HiArrowSmRight, HiChartPie, HiInbox, HiUser } from 'react-icons/hi';
+import { BiSolidOffer } from "react-icons/bi";
 import { IoMenu } from 'react-icons/io5';
 import { IoRestaurantOutline } from "react-icons/io5";
 import TokenContext from "../../Context/userContext";
@@ -49,6 +50,7 @@ export default function SideBar() {
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
                 <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
               </Sidebar.Item>
+
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>
@@ -74,7 +76,12 @@ export default function SideBar() {
               <Sidebar.Item icon={IoMenu}>
                 <Link to="/menu">menu</Link>
               </Sidebar.Item>
-
+              <Sidebar.Item icon={BiSolidOffer}>
+                <Link to="/promotion">promotion</Link>
+              </Sidebar.Item>
+              <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
+                <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
+              </Sidebar.Item>
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>

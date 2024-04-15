@@ -16,12 +16,20 @@ export const TokenContextProvider = (props) => {
             setUserType(decoded.type)
         }
 
-    }, [])
+    }, []);
 
-    
+    function getUserData() {
+        if (localStorage.getItem('accessToken')) {
+            setToken(localStorage.getItem('accessToken'))
+            const decoded = jwtDecode(localStorage.getItem('accessToken'));
+            setUser(decoded)
+            setUserType(decoded.type)
+        }
+
+    }
 
     return (
-        <TokenContext.Provider value={{ token, setToken, user, setUser, userType, setUserType }}>
+        <TokenContext.Provider value={{ token, setToken, user, setUser, userType, setUserType, getUserData }}>
             {props.children}
         </TokenContext.Provider>
     );
