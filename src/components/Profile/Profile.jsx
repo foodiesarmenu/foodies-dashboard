@@ -29,7 +29,7 @@ export default function Profile() {
       const decodedToken = jwtDecode(token);
       const email = decodedToken.email;
       const { data } = await axios.get(
-        `https://foodies-backend-1.onrender.com/dashboard/admin/Abdo@gmail.com`,
+        `https://foodies-backend-1.onrender.com/dashboard/admin/profile/${email}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -44,7 +44,7 @@ export default function Profile() {
       setIsLoading(false);
     }
   };
-  // need update Admin API
+// need update Admin API
   const updateProfile = async () => {
     try {
       setIsLoading(true);
@@ -128,7 +128,7 @@ export default function Profile() {
             <div className="space-y-1 font-medium dark:text-white">
               <div className="text-white text-3xl">{profileData.name}</div>
               <div className="text-sm text-gray-500 dark:text-gray-400 text-l">
-                Joined in {profileData.createdAt}
+              Joined in {new Date(profileData.createdAt).toLocaleDateString()}
               </div>
             </div>
           </Avatar>
