@@ -77,7 +77,7 @@ export default function SideBar() {
                 <Link to="/menu">menu</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={BiSolidOffer}>
-                <Link to="/promotion">promotion</Link>
+                <Link to="/promotions">promotions</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
                 <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>

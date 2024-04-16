@@ -80,7 +80,7 @@ export default function App() {
             </ProtectedRoutes>
         },
         {
-          path: 'promotion', element:
+          path: 'promotions', element:
             <ProtectedRoutes>
               <Promotion />
             </ProtectedRoutes>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card } from "flowbite-react";
 import axios from 'axios';
 import Loader from '../Loader/Loader';
+import AddPromotion from '../AddPromotion/AddPromotion';
 export default function Promotion() {
 
 
@@ -63,6 +64,9 @@ export default function Promotion() {
 
     return (
         <>
+            <div className="flex">
+            <AddPromotion setPromotion={setPromotion}/>
+            </div>
             {isLoading ? (
                 <div className="flex justify-center items-center h-96">
                     <Loader />

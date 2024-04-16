@@ -17,7 +17,7 @@ export default function LogIn() {
         setIsLoading(true);
         setApiError('');
         try {
-            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/auth/login', values);
+            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/restaurant/auth/login', values);
             setIsLoading(false);
             console.log(data);
             if (data) {
