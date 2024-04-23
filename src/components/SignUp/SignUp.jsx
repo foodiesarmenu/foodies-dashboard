@@ -27,6 +27,7 @@ function SignUp() {
             if (data.success === true)
                 navigate('/login');
         } catch (error) {
+            console.log(error,'error');
             setApiError(error.response ? error.response.data.message : 'An error occurred');
             setIsLoading(false);
         }

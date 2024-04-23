@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Home from "./components/Home/Home";
@@ -19,6 +19,10 @@ import { jwtDecode } from "jwt-decode";
 import TokenContext from "./Context/userContext";
 import Meals from "./components/Meals/Meals";
 import MealDetails from "./components/MealDetails/MealDetails";
+import Promotion from "./components/Promotion/Promotion";
+
+
+
 
 
 export default function App() {
@@ -94,6 +98,12 @@ export default function App() {
           path: 'categories', element:
             <ProtectedRoutes>
               <Category />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'promotions', element:
+            <ProtectedRoutes>
+              <Promotion />
             </ProtectedRoutes>
         },
         { path: "*", element: <NotFound /> }
