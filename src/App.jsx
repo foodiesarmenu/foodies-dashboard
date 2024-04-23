@@ -15,7 +15,14 @@ import Restaurants from "./components/Restaurants/Restaurants";
 import Category from "./components/Category/Category";
 import Profile from "./components/Profile/Profile";
 import Menu from "./components/Menu/Menu";
+import { jwtDecode } from "jwt-decode";
+import TokenContext from "./Context/userContext";
+import Meals from "./components/Meals/Meals";
+import MealDetails from "./components/MealDetails/MealDetails";
 import Promotion from "./components/Promotion/Promotion";
+
+
+
 
 
 export default function App() {
@@ -60,6 +67,20 @@ export default function App() {
             <ProtectedRoutes>
               <Menu />
             </ProtectedRoutes>
+        },
+        {
+          path: 'Meals', element:
+            <ProtectedRoutes>
+              <Meals />
+            </ProtectedRoutes>
+        },
+        {
+          path: "meal-details/:id",
+          element: (
+            <ProtectedRoutes>
+              <MealDetails/>
+            </ProtectedRoutes>
+          ),
         },
         {
           path: 'Analytics', element:

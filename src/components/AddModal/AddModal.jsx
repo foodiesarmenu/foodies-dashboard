@@ -40,8 +40,9 @@ export default function AddItems({ categories, setItems, type }) {
     const handleSubmit = async () => {
         setIsLoading(true);
         setErrorMessage('');
-
+        console.log(formData);
         const data = new FormData();
+        console.log(data, 'data');
         for (const key in formData) {
             data.append(key, formData[key]);
         }
