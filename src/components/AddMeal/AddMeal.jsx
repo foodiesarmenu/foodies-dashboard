@@ -77,11 +77,12 @@ export default function AddMeal({ tags }) {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRiZDY1YjQ4MjM5YTMxNzJmOTJlZWIiLCJlbWFpbCI6Inl1bmd5QGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMTIzIiwiYWRkcmVzcyI6IkFsZXgiLCJ0eXBlIjoiUmVzdGF1cmFudCIsImlhdCI6MTcwODkwNjE0MCwiZXhwIjoxNzQwNDYzNzQwfQ.MDrHAba8r7RqvUpwHRnRBACfYRFUvcF2PS6If6gKoLuoH9kg1litZmNBADktSwxE_41xdUxCxIZOMNT8N627ckF2ESA9-4XvgnfRe5OkOkFh3_SUdOGywK0t_0lBJlcCRsRyeiv-Tw97-JbDqQe9Gg9dHFBMRHW_MUKQVOq_hD07j9xYZlN2OSUbu2g0Qm5P7zHtejtK7iWwjR_D-VpSVipj6uDETld_H6H_B6ZvtlEyNxzMrJG_pcZ1jLsFnzDL-YfsvbtyeJcVEZ3iZuCeB35nmHJZGzTZZe8h8tORVNMG5dhK0zt0jayZXYcX03UNz-NxdAXebUwudTQio-uZXw`,
+            // karam elsham token
+            Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVlMzlhMGIzZWFjNTY0YjVkYjdhODEiLCJuYW1lIjoi2YPYsdmFINin2YTYtNin2YUiLCJlbWFpbCI6ImluZm9Aa2FybWVsc2hhbS5jb20iLCJwaG9uZU51bWJlciI6IisyMCAxMDAgMDAwIDEyMzQiLCJhZGRyZXNzIjoiMSwgRWwtTmFzciBSb2FkLCBIZWxpb3BvbGlzLCBDYWlybywgRWd5cHQiLCJpbWFnZSI6Imh0dHA6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGx2bmRjMDhhL2ltYWdlL3VwbG9hZC92MTcxMDExMTEzNS9yZXN0YXVyYW50L2l3dDN0NndzNGlrbGZkZXZhb3BpLnBuZyIsInR5cGUiOiJSZXN0YXVyYW50IiwiaWF0IjoxNzEzOTI2MTQ3LCJleHAiOjE3NDU0ODM3NDd9.awiQIMrqgtRSldBjugp4J8MIHZox6v86gc8V02C9d17km-VgzaMiONTaESv5qTG_O3pRM5tO0Ff0y45mYPiSAPOhqoNpE-2uc2KiOKhlHvZbpwzktmIyHQQkO_IaRgLZCBK7fd8ZRBBxTdOGa-NsuL2xq0oB0dkPiV1KxyXwskwGAq2gVpP8Kx5XUmf5J5SmR9RKeE1EEatVOLf-83vmhVyc00nLsVRCFmCIULcegiV0mXihQzY4XpZFiljdtz4gSHvc465JVYeYm3alrkp5Sti9lmSRIq0pk_TM_xxkpE6RYgOJXRH-DQ0U8SGRMFKJvQdA1x0hFRJlNM-olc8pIA`,
           },
         }
       );
-      console.log(response.data, "changed");
+      console.log(response.data);
       setIsLoading(false);
       setOpenModal(false);
     } catch (error) {

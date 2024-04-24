@@ -2,9 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FileInput, Label, Button, TextInput } from "flowbite-react";
+import { DeleteModalForAll } from "../DelteModalForAll/DelteModalForAll";
+import { useNavigate } from "react-router-dom";
 
 export default function MealDetails() {
   let { id } = useParams();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [meal, setMeal] = useState([]);
@@ -52,31 +55,45 @@ export default function MealDetails() {
     }
   };
 
-    // this handle formdata changes
-    const handleChange = (event) => {
-      const { id, value } = event.target;
-      setFormData((prevState) => ({
-        ...prevState,
-        [id]: value === null || value === "" ? prevState[id] : value,
-      }));
-    };
+  // this handle formdata changes
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [id]: value === null || value === "" ? prevState[id] : value,
+    }));
+  };
 
-    // this handle file changes
+  // this handle file changes
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-  
     reader.onloadend = () => {
       setMeal({ ...meal, image: reader.result });
       setFormData((prevState) => ({ ...prevState, image: file }));
     };
-  
     if (file) {
       reader.readAsDataURL(file);
     }
   };
 
-  
+  const handleDelete = () => {
+    try {
+      axios.delete(
+        `https://foodies-backend-1.onrender.com/dashboard/restaurant/meal/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRiZDY1YjQ4MjM5YTMxNzJmOTJlZWIiLCJlbWFpbCI6Inl1bmd5QGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMTIzIiwiYWRkcmVzcyI6IkFsZXgiLCJ0eXBlIjoiUmVzdGF1cmFudCIsImlhdCI6MTcwODkwNjE0MCwiZXhwIjoxNzQwNDYzNzQwfQ.MDrHAba8r7RqvUpwHRnRBACfYRFUvcF2PS6If6gKoLuoH9kg1litZmNBADktSwxE_41xdUxCxIZOMNT8N627ckF2ESA9-4XvgnfRe5OkOkFh3_SUdOGywK0t_0lBJlcCRsRyeiv-Tw97-JbDqQe9Gg9dHFBMRHW_MUKQVOq_hD07j9xYZlN2OSUbu2g0Qm5P7zHtejtK7iWwjR_D-VpSVipj6uDETld_H6H_B6ZvtlEyNxzMrJG_pcZ1jLsFnzDL-YfsvbtyeJcVEZ3iZuCeB35nmHJZGzTZZe8h8tORVNMG5dhK0zt0jayZXYcX03UNz-NxdAXebUwudTQio-uZXw`,
+          },
+        }
+      );
+      navigate("/meals");
+      console.log("deleted");
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const filteredFormData = Object.fromEntries(
@@ -118,7 +135,9 @@ export default function MealDetails() {
           />
         </div>
       </div>
-      <div className="p-5 col-span-2 text-2xl bg-gray-200 rounded ">
+      <div className="p-5 col-span-2 text-2xl bg-gray-200 rounded relative">
+        <DeleteModalForAll handleDelete={handleDelete} />
+
         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit}>
           <div>
             <div className="mb-2 block">

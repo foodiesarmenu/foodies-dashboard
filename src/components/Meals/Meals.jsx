@@ -67,7 +67,7 @@ export default function Meals() {
                       src={meal.image}
                       alt={meal.name}
                     />
-                    <div className="p-4">
+                    <div className="p-4 h-max		">
                       <a href="#">
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                           {meal.name}
