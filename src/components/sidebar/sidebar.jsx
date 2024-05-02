@@ -2,6 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
+
+import { IoFastFood } from "react-icons/io5";
+import { MdMenuBook } from "react-icons/md";
+
+
 import { IoMenu } from 'react-icons/io5';
 import { IoRestaurantOutline } from "react-icons/io5";
 import TokenContext from "../../Context/userContext";
@@ -48,7 +53,7 @@ export default function SideBar() {
               </Sidebar.Item>
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
                 <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
-              </Sidebar.Item>
+              </Sidebar.Item>           
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>
