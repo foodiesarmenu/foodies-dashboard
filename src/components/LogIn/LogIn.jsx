@@ -12,12 +12,12 @@ export default function LogIn() {
     const [isLoading, setIsLoading] = useState(false);
     const [apiError, setApiError] = useState('');
     const navigate = useNavigate();
-  
+
     const register = async (values) => {
         setIsLoading(true);
         setApiError('');
         try {
-            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/auth/login', values);
+            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/restaurant/auth/login', values);
             setIsLoading(false);
             console.log(data);
             if (data) {
@@ -27,6 +27,7 @@ export default function LogIn() {
                 navigate('/')
             }
         } catch (error) {
+            console.log(error);
             setApiError(error.response ? error.response.data.message : 'An error occurred');
             setIsLoading(false);
         }

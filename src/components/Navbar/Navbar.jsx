@@ -5,11 +5,13 @@ import { useContext, useEffect } from 'react';
 import TokenContext from '../../Context/userContext';
 
 export default function NavBar() {
-    const { user } = useContext(TokenContext);
+    const { user, getUserData } = useContext(TokenContext);
+
+    useEffect(() => {
+        getUserData();
+    }, []);
 
 
-
-   
     return (
         <div className='dark'>
             <Navbar fluid rounded className=''>
