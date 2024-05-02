@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Card, Table, Button, Pagination } from 'flowbite-react';
+import { Table, Pagination } from 'flowbite-react';
 import axios from 'axios';
 import DeleteModal from "../DeleteModal/DeleteModal";
 import UpdateModal from "../UpdateModal/UpdateModal";
 import Loader from "../Loader/Loader";
 import AddModal from "../AddModal/AddModal";
+import { Component } from "../Breadcrumb/Breadcrumb";
 
 export default function Category() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +49,7 @@ export default function Category() {
     return (
         <>
             <div className="flex justify-between">
-                <h1 className="text-white text-3xl">categorys</h1>
+                <Component second="Dashboard" third="Categories" />
                 <AddModal categories={categories} setItems={setCategories} type={'category'} />
             </div>
 
@@ -87,8 +88,8 @@ export default function Category() {
                             </Table.Body>
                         </Table>
                     </div>
-                    <div className="flex overflow-x-auto sm:justify-center">
-                        <Pagination currentPage={currentPage} totalPages={numberOfPages} onPageChange={onPageChange} showIcons />
+                    <div className="flex overflow-x-auto sm:justify-center p-2 ">
+                        <Pagination  showIcons currentPage={currentPage} totalPages={numberOfPages} onPageChange={onPageChange} />
                     </div>
                 </section>
             )}

@@ -10,7 +10,7 @@ import AddMeal from "../AddMeal/AddMeal";
 export default function Meals() {
   const [menu, setMenu] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [tags,setTags]=useState([])
+  const [tags, setTags] = useState([])
 
 
   const fetchMenu = async () => {

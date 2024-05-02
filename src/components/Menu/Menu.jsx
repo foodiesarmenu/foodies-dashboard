@@ -13,6 +13,7 @@ import {
 } from "flowbite-react";
 import { HiPencilAlt, HiTrash } from "react-icons/hi";
 import "./Menu.css";
+import { Component } from "../Breadcrumb/Breadcrumb";
 
 export default function Menu() {
   const [menu, setMenu] = useState([]);
@@ -95,6 +96,7 @@ export default function Menu() {
   return (
     <>
       <div className="flex justify-between m-2 items-center">
+        <Component second="Restaurant" third="Menu" />
         <h1 className="text-white text-3xl">Categories</h1>
       </div>
       <div className="flex justify-center overflow-x-auto whitespace-nowrap gap-8">

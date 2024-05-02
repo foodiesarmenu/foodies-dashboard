@@ -9,8 +9,9 @@ export default function MealDetails() {
   let { id } = useParams();
   const navigate = useNavigate();
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [meal, setMeal] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [meal, setMeal] = useState({});
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -20,6 +21,20 @@ export default function MealDetails() {
     carbohydrates: "",
     calories: "",
     // image: null,
+    sizes: [
+      {
+        size: "Small",
+        price: "",
+      },
+      {
+        size: "Medium",
+        price: "",
+      },
+      {
+        size: "Large",
+        price: "",
+      },
+    ],
   });
 
   const fetchMeal = async () => {
@@ -35,20 +50,24 @@ export default function MealDetails() {
           },
         }
       );
-      console.log(data.data);
+
       setMeal(data.data);
+
       setIsLoading(false);
-      if (meal) {
+      if (data.data) {
         setFormData({
-          name: meal.name,
-          description: meal.description,
-          price: meal.price,
-          protein: meal.protein,
-          fat: meal.fat,
-          Carbohydrates: meal.carbohydrates,
-          // image: meal.image,
+          name: data.data.name,
+          description: data.data.description,
+          price: data.data.price,
+          protein: data.data.protein,
+          fat: data.data.fat,
+          carbohydrates: data.data.carbohydrates,
+          calories: data.data.calories,
+          sizes: data.data.sizes.map((size) => ({ size: size.size, price: size.price })),
+          // image: data.data.image,
         });
       }
+
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -58,9 +77,13 @@ export default function MealDetails() {
   // this handle formdata changes
   const handleChange = (event) => {
     const { id, value } = event.target;
+
     setFormData((prevState) => ({
       ...prevState,
-      [id]: value === null || value === "" ? prevState[id] : value,
+      sizes: prevState.sizes.map((sizeObj) =>
+        sizeObj.size === id ? { ...sizeObj, price: value } : sizeObj
+      ),
+
     }));
   };
 
@@ -99,11 +122,19 @@ export default function MealDetails() {
     const filteredFormData = Object.fromEntries(
       Object.entries(formData).filter(([_, value]) => value !== null)
     );
-    console.log(filteredFormData);
+    const updatedFormData = {
+      ...filteredFormData,
+      calories: String(filteredFormData.calories),
+      protein: String(filteredFormData.protein),
+      fat: String(filteredFormData.fat),
+      carbohydrates: String(filteredFormData.carbohydrates),
+    };
+    console.log(updatedFormData);
+    setIsLoading(true);
     try {
       const response = await axios.patch(
         `https://foodies-backend-1.onrender.com/dashboard/restaurant/meal/${id}`,
-        formData,
+        updatedFormData,
         {
           headers: {
             Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWRiZDY1YjQ4MjM5YTMxNzJmOTJlZWIiLCJlbWFpbCI6Inl1bmd5QGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjoiMTIzIiwiYWRkcmVzcyI6IkFsZXgiLCJ0eXBlIjoiUmVzdGF1cmFudCIsImlhdCI6MTcwODkwNjE0MCwiZXhwIjoxNzQwNDYzNzQwfQ.MDrHAba8r7RqvUpwHRnRBACfYRFUvcF2PS6If6gKoLuoH9kg1litZmNBADktSwxE_41xdUxCxIZOMNT8N627ckF2ESA9-4XvgnfRe5OkOkFh3_SUdOGywK0t_0lBJlcCRsRyeiv-Tw97-JbDqQe9Gg9dHFBMRHW_MUKQVOq_hD07j9xYZlN2OSUbu2g0Qm5P7zHtejtK7iWwjR_D-VpSVipj6uDETld_H6H_B6ZvtlEyNxzMrJG_pcZ1jLsFnzDL-YfsvbtyeJcVEZ3iZuCeB35nmHJZGzTZZe8h8tORVNMG5dhK0zt0jayZXYcX03UNz-NxdAXebUwudTQio-uZXw`,
@@ -111,8 +142,11 @@ export default function MealDetails() {
         }
       );
       console.log(response);
+      setMeal(response.data.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -170,10 +204,9 @@ export default function MealDetails() {
               <Label htmlFor="price" value="price" />
               <TextInput
                 id="price"
-                type="price"
+                type="text"
                 placeholder={meal.price}
                 defaultValue={meal.price}
-                value={formData.price}
                 onChange={handleChange}
               />
             </div>
@@ -182,10 +215,9 @@ export default function MealDetails() {
                 <Label htmlFor="protein" value="Protein" />
                 <TextInput
                   id="protein"
-                  type="number"
+                  type="text"
                   placeholder={meal.protein}
                   defaultValue={meal.protein}
-                  value={formData.protein}
                   onChange={handleChange}
                 />
               </div>
@@ -193,10 +225,9 @@ export default function MealDetails() {
                 <Label htmlFor="fats" value="Fats" />
                 <TextInput
                   id="fat"
-                  type="number"
+                  type="text"
                   placeholder={meal.fat}
                   defaultValue={meal.fat}
-                  value={formData.fat}
                   onChange={handleChange}
                 />
               </div>
@@ -204,10 +235,9 @@ export default function MealDetails() {
                 <Label htmlFor="carbohydrates" value="Carbohydrates" />
                 <TextInput
                   id="carbohydrates"
-                  type="number"
+                  type="text"
                   placeholder={meal.carbohydrates}
                   defaultValue={meal.carbohydrates}
-                  value={formData.carbohydrates}
                   onChange={handleChange}
                 />
               </div>
@@ -215,16 +245,38 @@ export default function MealDetails() {
                 <Label htmlFor="calories" value="Calories" />
                 <TextInput
                   id="calories"
-                  type="number"
+                  type="text"
                   placeholder={meal.calories}
                   defaultValue={meal.calories}
-                  value={formData.calories}
+
                   onChange={handleChange}
                 />
               </div>
+
+            </div>
+            <div >
+              <Label htmlFor="sizes" value="Sizes" />
+              <div className="grid grid-cols-3 gap-3 ">
+                {formData.sizes.map((sizeObj, index) => (
+                  <div key={index}>
+                    <Label htmlFor={sizeObj.size} value={`Size: ${sizeObj.size}`} />
+                    <TextInput
+                      id={sizeObj.size}
+                      type='number'
+                      placeholder={`Price for ${sizeObj.size}`}
+                      defaultValue={sizeObj.price}
+                      onChange={handleChange}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" onClick={handleSubmit}>
+            {
+              isLoading ? <i className='fa fa-spin fa-spinner'></i> : 'Update'
+            }
+          </Button>
         </form>
       </div>
     </div>

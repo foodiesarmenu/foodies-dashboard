@@ -3,6 +3,7 @@ import { Button, Card } from "flowbite-react";
 import axios from 'axios';
 import Loader from '../Loader/Loader';
 import AddPromotion from '../AddPromotion/AddPromotion';
+import { Component } from '../Breadcrumb/Breadcrumb';
 export default function Promotion() {
 
 
@@ -64,8 +65,10 @@ export default function Promotion() {
 
     return (
         <>
+            <Component second="Restaurant" third="Promotion" />
+
             <div className="flex">
-            <AddPromotion setPromotion={setPromotion}/>
+                <AddPromotion setPromotion={setPromotion} />
             </div>
             {isLoading ? (
                 <div className="flex justify-center items-center h-96">
@@ -74,6 +77,7 @@ export default function Promotion() {
 
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
                     {promotion?.map((promo) => (
                         <Card
                             key={promo._id}

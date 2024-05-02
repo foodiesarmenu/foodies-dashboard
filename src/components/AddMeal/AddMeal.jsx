@@ -20,11 +20,15 @@ export default function AddMeal({ tags }) {
     protein: 0,
     fat: 0,
     carbohydrates: 0,
-    price: "",
     currency: "",
     image: null,
     tags: [],
     rate: "",
+    sizes: [
+      { size: "Small", price: "" },
+      { size: "Medium", price: "" },
+      { size: "Large", price: "" },
+    ],
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,10 +45,18 @@ export default function AddMeal({ tags }) {
           (option) => option.value
         ),
       });
+    }
+    else if (["Small", "Medium", "Large"].includes(id)) {
+      setFormData((prev) => ({
+        ...prev,
+        sizes: prev.sizes.map((size) =>
+          size.size === id ? { ...size, price: parseInt(value, 10) } : size
+        ),
+      }));
     } else {
       setFormData((prev) => ({
         ...prev,
-        [id]: ["calories", "carbohydrates", "fat", "price", "protein"].includes(
+        [id]: ["calories", "carbohydrates", "fat", "protein"].includes(
           id
         )
           ? parseInt(value, 10)
@@ -58,14 +70,24 @@ export default function AddMeal({ tags }) {
     console.log(formData);
     const data = new FormData();
     console.log(data, "data");
-    for (const key in formData) {
-      if (key === "tags") {
-        formData[key].forEach((tag, index) => {
-          data.append(`${key}[${index}]`, tag); // Append each tag separately
+    for (let key in formData) {
+      if (key === "sizes") {
+        // If the key is "sizes", append each property of each object in the sizes array
+        formData[key].forEach((size, index) => {
+          for (let sizeKey in size) {
+            data.append(`sizes[${index}][${sizeKey}]`, size[sizeKey]);
+          }
         });
-      } else if (key === "rate") {
-        data.append(key, String(formData[key])); // Convert rate to string
+      } else if (key === "tags") {
+        // If the key is "tags", append each tag
+        formData[key].forEach((tag, index) => {
+          data.append(`tags[${index}]`, tag);
+        });
+      } else if (key === "image") {
+        // If the key is "image", append the file
+        data.append(key, formData[key], formData[key].name);
       } else {
+        // For all other keys, simply append the value
         data.append(key, formData[key]);
       }
     }
@@ -125,13 +147,7 @@ export default function AddMeal({ tags }) {
                 onChange={handleChange}
               />
               <div className="grid grid-cols-2 gap-4">
-                <TextInput
-                  id="price"
-                  placeholder="price"
-                  required
-                  value={formData.price}
-                  onChange={handleChange}
-                />
+
                 <TextInput
                   id="currency"
                   placeholder="Currency"
@@ -229,6 +245,20 @@ export default function AddMeal({ tags }) {
                   id="image"
                   helperText="Please Select one photo"
                 />
+                <div className="grid grid-cols-2 gap-4">
+                  {formData.sizes.map((sizeObj, index) => (
+                    <div key={index}>
+                      <Label htmlFor={sizeObj.size} value={`Size: ${sizeObj.size}`} />
+                      <TextInput
+                        id={sizeObj.size}
+                        placeholder={`Price for ${sizeObj.size}`}
+                        required={sizeObj.size === "Small"} // At least small size is required
+                        value={sizeObj.price}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 

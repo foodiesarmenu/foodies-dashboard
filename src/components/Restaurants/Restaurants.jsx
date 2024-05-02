@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Card, Table, Button, Pagination } from 'flowbite-react';
+import { Card, Table, Button, Pagination, Breadcrumb } from 'flowbite-react';
 import axios from 'axios';
 import DeleteModal from "../DeleteModal/DeleteModal";
 import UpdateModal from "../UpdateModal/UpdateModal";
 import Loader from "../Loader/Loader";
 import AddModal from "../AddModal/AddModal";
+import { Component } from "../Breadcrumb/Breadcrumb";
 
 export default function Restaurants() {
     const [restaurants, setRestaurants] = useState([]);
@@ -62,7 +63,8 @@ export default function Restaurants() {
     return (
         <>
             <div className="flex justify-between">
-                <h1 className="text-white text-3xl">Restaurants</h1>
+
+                <Component second={'Dashboard'} third={'Restaurant'} />
                 <AddModal categories={categories} setItems={setRestaurants} type={'restaurant'} />
             </div>
 
