@@ -5,12 +5,11 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import UpdateModal from "../UpdateModal/UpdateModal";
 import Loader from "../Loader/Loader";
 import AddModal from "../AddModal/AddModal";
-import { Component } from "../Breadcrumb/Breadcrumb";
+import {Component} from "../Breadcrumb/Breadcrumb";
 
 export default function Category() {
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(0);
-    const [numnerOfRecordes, setNumberOfRecords] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [categories, setCategories] = useState([]);
 
@@ -24,10 +23,8 @@ export default function Category() {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
             });
-            console.log(data);
             setCategories(data.data);
             setNumberOfPages(data.numberOfPages);
-            setNumberOfRecords(data.numberOfRecords);
             setCurrentPage(data.currentPage);
             setIsLoading(false);
         } catch (error) {
@@ -35,7 +32,6 @@ export default function Category() {
             setIsLoading(false);
         }
     }
-
 
     useEffect(() => {
         fetchCategories(currentPage);
@@ -58,16 +54,16 @@ export default function Category() {
                     <Loader />
                 </div>
             ) : (
-                <section className="pt-6 ">
-                    <div className="overflow-x-auto ">
+                <section className="pt-6">
+                    <div className="overflow-x-auto">
                         <Table hoverable className="dark">
                             <Table.Head>
                                 <Table.HeadCell>Image</Table.HeadCell>
                                 <Table.HeadCell>Name</Table.HeadCell>
-                                <Table.HeadCell>description</Table.HeadCell>
+                                <Table.HeadCell>Description</Table.HeadCell>
                                 <Table.HeadCell>Actions</Table.HeadCell>
                             </Table.Head>
-                            <Table.Body className="divide-y ">
+                            <Table.Body className="divide-y">
                                 {categories.map((category) => (
                                     <Table.Row key={category._id} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                         <Table.Cell>
@@ -88,8 +84,8 @@ export default function Category() {
                             </Table.Body>
                         </Table>
                     </div>
-                    <div className="flex overflow-x-auto sm:justify-center p-2 ">
-                        <Pagination  showIcons currentPage={currentPage} totalPages={numberOfPages} onPageChange={onPageChange} />
+                    <div className="flex justify-center mt-4">
+                        <Pagination showIcons currentPage={currentPage} totalPages={numberOfPages} onPageChange={onPageChange} />
                     </div>
                 </section>
             )}

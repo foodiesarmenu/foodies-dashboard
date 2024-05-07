@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Card, Table, Button, Pagination, Breadcrumb } from 'flowbite-react';
+import { Table, Pagination } from 'flowbite-react';
 import axios from 'axios';
 import DeleteModal from "../DeleteModal/DeleteModal";
 import UpdateModal from "../UpdateModal/UpdateModal";
 import Loader from "../Loader/Loader";
 import AddModal from "../AddModal/AddModal";
-import { Component } from "../Breadcrumb/Breadcrumb";
+import {Component} from "../Breadcrumb/Breadcrumb";
 
 export default function Restaurants() {
     const [restaurants, setRestaurants] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [numberOfPages, setNumberOfPages] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
-    const [categories, setCategories] = useState([]); // New state variable
+    const [categories, setCategories] = useState([]); 
 
     const fetchRestaurants = async (page = 1) => {
         setIsLoading(true);
@@ -25,10 +25,8 @@ export default function Restaurants() {
                 }
             });
             setRestaurants(data.data);
-            // console.log(data.data);
             setCurrentPage(data.currentPage);
             setNumberOfPages(data.numberOfPages);
-            // console.log(data);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -44,7 +42,6 @@ export default function Restaurants() {
                 }
             });
             setCategories(data.data);
-            // console.log(data);
         } catch (error) {
             console.log(error);
         }
@@ -57,22 +54,19 @@ export default function Restaurants() {
 
     const onPageChange = (page) => {
         setCurrentPage(page);
-        fetchRestaurants(page);
     };
 
     return (
         <>
             <div className="flex justify-between">
-
-                <Component second={'Dashboard'} third={'Restaurant'} />
-                <AddModal categories={categories} setItems={setRestaurants} type={'restaurant'} />
+                <Component second="Dashboard" third="Restaurant" />
+                <AddModal categories={categories} setItems={setRestaurants} type="restaurant" />
             </div>
 
             {isLoading ? (
                 <div className="flex justify-center items-center h-96">
                     <Loader />
                 </div>
-
             ) : (
                 <section className="pt-6 ">
                     <div className="overflow-x-auto ">
@@ -83,7 +77,7 @@ export default function Restaurants() {
                                 <Table.HeadCell>Email</Table.HeadCell>
                                 <Table.HeadCell>Address</Table.HeadCell>
                                 <Table.HeadCell>Phone Number</Table.HeadCell>
-                                <Table.HeadCell>Can Deliver</Table.HeadCell> {/* New column */}
+                                <Table.HeadCell>Can Deliver</Table.HeadCell>
                                 <Table.HeadCell>Actions</Table.HeadCell>
                             </Table.Head>
                             <Table.Body className="divide-y ">
@@ -98,10 +92,10 @@ export default function Restaurants() {
                                         <Table.Cell>{restaurant.email}</Table.Cell>
                                         <Table.Cell>{restaurant.address}</Table.Cell>
                                         <Table.Cell>{restaurant.phoneNumber}</Table.Cell>
-                                        <Table.Cell>{restaurant.canDeliver ? 'Yes' : 'No'}</Table.Cell> {/* Display canDeliver */}
+                                        <Table.Cell>{restaurant.canDeliver ? 'Yes' : 'No'}</Table.Cell>
                                         <Table.Cell>
                                             <div className="flex flex-row">
-                                                <UpdateModal item={restaurant} categories={categories} setItems={setRestaurants} type={'restaurant'} />
+                                                <UpdateModal item={restaurant} categories={categories} setItems={setRestaurants} type="restaurant" />
                                                 <DeleteModal itemId={restaurant._id} setItems={setRestaurants} type="restaurant" />
                                             </div>
                                         </Table.Cell>
