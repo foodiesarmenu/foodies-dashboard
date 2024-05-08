@@ -11,8 +11,9 @@ import {
 import { HiPencil, HiOutlineCheck, HiCheck } from "react-icons/hi";
 import axios from "axios";
 import Loader from "../Loader/Loader";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import TokenContext from "../../Context/userContext";
 
 export default function Profile() {
   const [profileData, setProfileData] = useState(null);
@@ -22,20 +23,29 @@ export default function Profile() {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
 
+  const { userType } = useContext(TokenContext);
+  let type = userType || "Admin";
+
+
   const fetchProfile = async () => {
+    const token = localStorage.getItem("accessToken");
+    const decodedToken = jwtDecode(token);
+    const email = decodedToken.email;
+    const id = decodedToken._id;
+    let url;
+    if (type === "Admin") {
+      url = `https://foodies-backend-1.onrender.com/dashboard/admin/profile/${email}`;
+    } else if (type === "Restaurant") {
+      url = `https://foodies-backend-1.onrender.com/dashboard/admin/restaurant/${id}`;
+    }
     try {
       setIsLoading(true);
-      const token = localStorage.getItem("accessToken");
-      const decodedToken = jwtDecode(token);
-      const email = decodedToken.email;
-      const { data } = await axios.get(
-        `https://foodies-backend-1.onrender.com/dashboard/admin/profile/${email}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      );
+
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWhhYlRhcmVrQWRtaW4iLCJfaWQiOiI2NjE5YjQ1OGU3MjE1YWFjMGZmMDQ5NDUiLCJpbWFnZSI6Imh0dHA6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGx2bmRjMDhhL2ltYWdlL3VwbG9hZC92MTcxMjk2MDU5OC9wcm9maWxlL3N5aXRneWh6aXlkN2Z0cmFhcWt6LmpwZyIsImVtYWlsIjoiRWhhYlRhcmVrQWRtaW5AZ21haWwuY29tIiwiY291bnRyeUNvZGUiOiIyMCIsInBob25lTnVtYmVyIjoiMDExNTcwMDMzNTAiLCJ0eXBlIjoiQWRtaW4iLCJpYXQiOjE3MTUxNTYyMDAsImV4cCI6MTc0NjcxMzgwMH0.jNlUPIBOG86lLln8Og5MsdfqO0LiI0iP2dWJgFdmWVoG3QzJ8tsZN6TlWobcPSt3VQ-Ph-Yz0yu_yXr6px8-lKsPpLYDdRLNdu1H_tvddC7Fzr3kmskP8vQmaRPyaNmJUQ_r_wtaEQfuQintQaL10Gwx_tSw6DHajDZTzBQsLZpFdgQ0BG6daRiBkResVYZgGhZhHcqBYNIhbLgXJ1vubDA5kSHtahioXUt1pzGGS5BT9aXA9127YWJqpCK6NE6_WrUuoddL7fhXnpY0nL8yPbw1YmT1uxkHkUf1TCOmK-6K9Fcos-xx8dU-JXI6HWu7JWRENTsSY_bU6sIVb0bRkA`,
+        },
+      });
       console.log(data.data);
       setProfileData(data.data);
     } catch (error) {
@@ -44,7 +54,7 @@ export default function Profile() {
       setIsLoading(false);
     }
   };
-// need update Admin API
+  // need update Admin API
   const updateProfile = async () => {
     try {
       setIsLoading(true);
@@ -128,7 +138,7 @@ export default function Profile() {
             <div className="space-y-1 font-medium dark:text-white">
               <div className="text-white text-3xl">{profileData.name}</div>
               <div className="text-sm text-gray-500 dark:text-gray-400 text-l">
-              Joined in {new Date(profileData.createdAt).toLocaleDateString()}
+                Joined in {new Date(profileData.createdAt).toLocaleDateString()}
               </div>
             </div>
           </Avatar>

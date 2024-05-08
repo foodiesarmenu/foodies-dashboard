@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from 'react-icons/hi';
+import { HiArrowSmRight, HiChartPie, HiInbox,HiUser } from 'react-icons/hi';
 import { IoFastFood } from "react-icons/io5";
 import { MdMenuBook } from "react-icons/md";
 import { BiSolidOffer } from "react-icons/bi";
