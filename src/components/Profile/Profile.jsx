@@ -59,7 +59,7 @@ export default function Profile() {
     try {
       setIsLoading(true);
       const { data } = await axios.patch(
-        `https://foodies-backend-1.onrender.com/dashboard/admin/restaurant`,
+        `https://foodies-backend-1.onrender.com/dashboard/admin/restaurant/${profileData._id}`,
         formData,
         {
           headers: {
@@ -106,107 +106,128 @@ export default function Profile() {
 
   return (
     <>
-      {showSuccessToast && (
-        <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
-          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
-            <HiCheck className="h-5 w-5" />
-          </div>
-          <div className="ml-3 text-sm font-normal">Updated successfully.</div>
-          <Toast.Toggle onClick={() => setShowSuccessToast(false)} />
-        </Toast>
-      )}
-
-      {showErrorToast && (
-        <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
-          <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
-            <HiCheck className="h-5 w-5" />
-          </div>
-          <div className="ml-3 text-sm font-normal">Update failed.</div>
-          <Toast.Toggle onClick={() => setShowErrorToast(false)} />
-        </Toast>
-      )}
-      <div className="flex justify-between mb-5">
-        <div className="col-md-6">
-          <Avatar
-            img={
-              profileData && profileData.image
-                ? profileData.image
-                : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-            }
-            size="xl"
-          >
-            <div className="space-y-1 font-medium dark:text-white">
-              <div className="text-white text-3xl">{profileData.name}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 text-l">
-                Joined in {new Date(profileData.createdAt).toLocaleDateString()}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-96">
+          <Loader />
+        </div>
+      ) : (
+        <>
+          {showSuccessToast && (
+            <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
+              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
+                <HiCheck className="h-5 w-5" />
               </div>
+              <div className="ml-3 text-sm font-normal">
+                Updated successfully.
+              </div>
+              <Toast.Toggle onClick={() => setShowSuccessToast(false)} />
+            </Toast>
+          )}
+
+          {showErrorToast && (
+            <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
+              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+                <HiCheck className="h-5 w-5" />
+              </div>
+              <div className="ml-3 text-sm font-normal">Update failed.</div>
+              <Toast.Toggle onClick={() => setShowErrorToast(false)} />
+            </Toast>
+          )}
+
+          {showErrorToast && (
+            <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
+              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
+                <HiCheck className="h-5 w-5" />
+              </div>
+              <div className="ml-3 text-sm font-normal">Update failed.</div>
+              <Toast.Toggle onClick={() => setShowErrorToast(false)} />
+            </Toast>
+          )}
+          <div className="flex justify-between mb-5">
+            <div className="col-md-6">
+              <Avatar
+                img={
+                  profileData && profileData.image
+                    ? profileData.image
+                    : "https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                }
+                size="xl"
+              >
+                <div className="space-y-1 font-medium dark:text-white">
+                  <div className="text-white text-3xl">{profileData.name}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 text-l">
+                    Joined in{" "}
+                    {new Date(profileData.createdAt).toLocaleDateString()}
+                  </div>
+                </div>
+              </Avatar>
             </div>
-          </Avatar>
-        </div>
-        <div className="col-md-6 mt-5">
-          <Button
-            className="mt-5"
-            onClick={() => {
-              setIsDisabled(!isDisabled);
-              if (!isDisabled) {
-                updateProfile();
-              }
-            }}
-          >
-            {isDisabled ? (
-              <HiPencil className="mr-2 h-5 w-5" />
-            ) : (
-              <HiOutlineCheck className="mr-2 h-5 w-5" />
-            )}
-            {isDisabled ? "Edit Profile" : "Confirm"}
-          </Button>
-        </div>
-      </div>
-      <div className="container gap-4">
-        <div className="flex max-w-md flex-col gap-4">
-          <Label className="text-white text-xl" htmlFor="disabledInput1">
-            Email
-          </Label>
-          <TextInput
-            type="text"
-            id="disabledInput1"
-            placeholder={profileData.email}
-            disabled={isDisabled}
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-          <Label className="text-white text-xl" htmlFor="disabledInput3">
-            Phone
-          </Label>
-          <TextInput
-            type="text"
-            id="disabledInput3"
-            placeholder={profileData.phoneNumber}
-            disabled={isDisabled}
-            value={formData.phoneNumber}
-            onChange={(e) =>
-              setFormData({ ...formData, phoneNumber: e.target.value })
-            }
-          />
-          <Label className="text-white text-xl" htmlFor="genderSelect">
-            Gender
-          </Label>
-          <Select
-            disabled={isDisabled}
-            label={formData.gender}
-            value={formData.gender}
-            onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
-            }
-            dismissOnClick={false}
-          >
-            <option>Male</option>
-            <option>Female</option>
-          </Select>
-        </div>
-      </div>
+            <div className="col-md-6 mt-5">
+              <Button
+                className="mt-5"
+                onClick={() => {
+                  setIsDisabled(!isDisabled);
+                  if (!isDisabled) {
+                    updateProfile();
+                  }
+                }}
+              >
+                {isDisabled ? (
+                  <HiPencil className="mr-2 h-5 w-5" />
+                ) : (
+                  <HiOutlineCheck className="mr-2 h-5 w-5" />
+                )}
+                {isDisabled ? "Edit Profile" : "Confirm"}
+              </Button>
+            </div>
+          </div>
+          <div className="container gap-4">
+            <div className="flex max-w-md flex-col gap-4">
+              <Label className="text-white text-xl" htmlFor="disabledInput1">
+                Email
+              </Label>
+              <TextInput
+                type="text"
+                id="disabledInput1"
+                placeholder={profileData.email}
+                disabled={isDisabled}
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
+              <Label className="text-white text-xl" htmlFor="disabledInput3">
+                Phone
+              </Label>
+              <TextInput
+                type="text"
+                id="disabledInput3"
+                placeholder={profileData.phoneNumber}
+                disabled={isDisabled}
+                value={formData.phoneNumber}
+                onChange={(e) =>
+                  setFormData({ ...formData, phoneNumber: e.target.value })
+                }
+              />
+              <Label className="text-white text-xl" htmlFor="genderSelect">
+                Gender
+              </Label>
+              <Select
+                disabled={isDisabled}
+                label={formData.gender}
+                value={formData.gender}
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
+                dismissOnClick={false}
+              >
+                <option>Male</option>
+                <option>Female</option>
+              </Select>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

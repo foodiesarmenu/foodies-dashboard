@@ -83,7 +83,10 @@ export default function SideBar() {
                 <Link to="/profile">Profile</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={IoMenu}>
-                <Link to="/menu">menu</Link>
+                <Link to="/meals">meals</Link>
+              </Sidebar.Item>
+              <Sidebar.Item icon={IoMenu}>
+                <Link to="/coupon">coupon</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={BiSolidOffer}>
                 <Link to="/promotions">promotions</Link>

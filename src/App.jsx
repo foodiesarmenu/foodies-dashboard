@@ -20,6 +20,7 @@ import TokenContext from "./Context/userContext";
 import Meals from "./components/Meals/Meals";
 import MealDetails from "./components/MealDetails/MealDetails";
 import Promotion from "./components/Promotion/Promotion";
+import ResturantCoupon from "./components/ResturantCoupon/ResturantCoupon";
 
 
 
@@ -104,6 +105,12 @@ export default function App() {
           path: 'promotions', element:
             <ProtectedRoutes>
               <Promotion />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'coupon', element:
+            <ProtectedRoutes>
+              <ResturantCoupon />
             </ProtectedRoutes>
         },
         { path: "*", element: <NotFound /> }
