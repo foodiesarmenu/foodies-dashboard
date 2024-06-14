@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiChartPie, HiInbox,HiUser } from 'react-icons/hi';
+import { HiArrowSmRight, HiChartPie, HiInbox, HiUser } from 'react-icons/hi';
 import { IoFastFood } from "react-icons/io5";
 import { MdMenuBook } from "react-icons/md";
 import { BiSolidOffer } from "react-icons/bi";
@@ -55,8 +55,9 @@ export default function SideBar() {
               <Sidebar.Item icon={IoFastFood}>
                 <Link to="/Meals">Meals</Link>
               </Sidebar.Item>
+
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
-                <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>                      
+                <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
 
               </Sidebar.Item>
 
@@ -90,6 +91,9 @@ export default function SideBar() {
               </Sidebar.Item>
               <Sidebar.Item icon={BiSolidOffer}>
                 <Link to="/promotions">promotions</Link>
+              </Sidebar.Item>
+              <Sidebar.Item icon={IoFastFood}>
+                <Link to="/Orders">Orders</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
                 <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>

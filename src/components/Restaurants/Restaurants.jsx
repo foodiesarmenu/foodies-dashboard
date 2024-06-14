@@ -31,7 +31,7 @@ export default function Restaurants() {
         } catch (error) {
             console.log(error);
             setIsLoading(false);
-        }
+        } 
     }
 
     const fetchCategories = async () => {

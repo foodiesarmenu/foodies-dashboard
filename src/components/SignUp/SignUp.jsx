@@ -62,7 +62,7 @@ function SignUp() {
 
     return (
         <div className="flex min-h-screen bg-gray-100">
-            <div className="hidden lg:flex flex-col w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1529391387768-ab39476d6a52?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}>
+            <div className="hidden lg:flex flex-col w-1/2 bg-cover bg-center" style={{ backgroundImage: "url('https://res.cloudinary.com/dlvndc08a/image/upload/v1718310629/y92vywr8qfeybfndewjm.png')" }}>
                 {/* Optional content for the image side */}
             </div>
             <div className="flex flex-col justify-center px-4 lg:px-8 w-full max-w-md m-auto">

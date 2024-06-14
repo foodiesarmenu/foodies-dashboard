@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
 
 export default function RestaurantCoupon() {
   const [coupons, setCoupons] = useState([]);
-  const user = useContext(TokenContext);
+  const user = useContext(TokenContext); 
   console.log(user.user._id);
 
   const handleSubmit = async (values, { resetForm }) => {

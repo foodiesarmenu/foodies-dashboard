@@ -21,6 +21,7 @@ import Meals from "./components/Meals/Meals";
 import MealDetails from "./components/MealDetails/MealDetails";
 import Promotion from "./components/Promotion/Promotion";
 import ResturantCoupon from "./components/ResturantCoupon/ResturantCoupon";
+import Order from "./components/Order/Order";
 
 
 
@@ -79,7 +80,7 @@ export default function App() {
           path: "meal-details/:id",
           element: (
             <ProtectedRoutes>
-              <MealDetails/>
+              <MealDetails />
             </ProtectedRoutes>
           ),
         },
@@ -111,6 +112,18 @@ export default function App() {
           path: 'coupon', element:
             <ProtectedRoutes>
               <ResturantCoupon />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'orders', element:
+            <ProtectedRoutes>
+              <Order />
+            </ProtectedRoutes>
+        },
+        {
+          path: 'Order/:orderId/details', element:
+            <ProtectedRoutes>
+              <OrderDetails />
             </ProtectedRoutes>
         },
         { path: "*", element: <NotFound /> }
