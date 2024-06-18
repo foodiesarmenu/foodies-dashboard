@@ -22,6 +22,8 @@ import MealDetails from "./components/MealDetails/MealDetails";
 import Promotion from "./components/Promotion/Promotion";
 import ResturantCoupon from "./components/ResturantCoupon/ResturantCoupon";
 import Order from "./components/Order/Order";
+import LogInAmin from "./components/loginAdmin/loginAdmin";
+import SignUpAdmin from "./components/signUpAdmin/signUpAdmin";
 
 
 
@@ -129,8 +131,10 @@ export default function App() {
         { path: "*", element: <NotFound /> }
       ]
     },
-    { path: 'login', element: <LogIn /> },
-    { path: 'signUp', element: <SignUp /> },
+    { path: 'vendor/login', element: <LogIn /> },
+    { path: 'vendor/signUp', element: <SignUp /> },
+    { path: 'Admin/login', element: <LogInAmin /> },
+    { path: 'Admin/signUp', element: <SignUpAdmin /> },
   ]);
 
 

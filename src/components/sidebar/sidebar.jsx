@@ -15,8 +15,10 @@ export default function SideBar() {
   const [isAdmin, setIsAdmin] = useState(false)
   console.log(userType);
   const handleLogout = () => {
+    const type = userType === 'Admin' ? 'Admin' : 'Vendor'
+
     localStorage.removeItem('accessToken')
-    navigator('/login')
+    navigator(`${type}/login`)
   }
 
   useEffect(() => {
@@ -49,12 +51,12 @@ export default function SideBar() {
               <Sidebar.Item icon={HiUser}>
                 <Link to="/profile">Profile</Link>
               </Sidebar.Item>
-              <Sidebar.Item icon={MdMenuBook}>
+              {/* <Sidebar.Item icon={MdMenuBook}>
                 <Link to="/menu">menu</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={IoFastFood}>
                 <Link to="/Meals">Meals</Link>
-              </Sidebar.Item>
+              </Sidebar.Item> */}
 
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
                 <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
@@ -74,12 +76,12 @@ export default function SideBar() {
               <Sidebar.Item href="#" icon={HiChartPie}>
                 <Link to="/">Dashboard</Link>
               </Sidebar.Item>
-              <Sidebar.Item icon={IoRestaurantOutline}>
+              {/* <Sidebar.Item icon={IoRestaurantOutline}>
                 <Link to="/restaurants"> Restaurant</Link>
               </Sidebar.Item>
               <Sidebar.Item href="#" icon={HiInbox}>
                 <Link to="/categories">Categories</Link>
-              </Sidebar.Item>
+              </Sidebar.Item> */}
               <Sidebar.Item icon={HiUser}>
                 <Link to="/profile">Profile</Link>
               </Sidebar.Item>

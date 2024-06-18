@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-function SignUp() {
+export default function SignUpAdmin() {
     const [isLoading, setIsLoading] = useState(false);
     const [apiError, setApiError] = useState('');
     const [imageFile, setImageFile] = useState(null); // New state variable for the image file
@@ -27,7 +27,7 @@ function SignUp() {
             if (data.success === true)
                 navigate('/login');
         } catch (error) {
-            console.log(error,'error');
+            console.log(error, 'error');
             setApiError(error.response ? error.response.data.message : 'An error occurred');
             setIsLoading(false);
         }
@@ -215,7 +215,7 @@ function SignUp() {
 
                     <p className="text-sm text-center text-gray-400 mt-4">
                         Already have an account?{' '}
-                        <Link to="/Vendor/login" className="text-indigo-400 hover:underline">
+                        <Link to="/Admin/login" className="text-indigo-400 hover:underline">
                             Login
                         </Link>
                     </p>
@@ -225,4 +225,4 @@ function SignUp() {
     );
 }
 
-export default SignUp;
+

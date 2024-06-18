@@ -19,11 +19,11 @@ export default function LogIn() {
     setApiError("");
     console.log(userType)
     try {
-        const url = userType === "Admin" 
-        ? "https://foodies-backend-1.onrender.com/dashboard/auth/login" 
-        : "https://foodies-backend-1.onrender.com/dashboard/restaurant/auth/login";
+      // const url = userType === "Admin"
+      //   ? "https://foodies-backend-1.onrender.com/dashboard/auth/login"
+      //   : "https://foodies-backend-1.onrender.com/dashboard/restaurant/auth/login";
       const { data } = await axios.post(
-        url,
+        "https://foodies-backend-1.onrender.com/dashboard/restaurant/auth/login",
         values
       );
       setIsLoading(false);
@@ -64,7 +64,7 @@ export default function LogIn() {
     },
   });
   return (
-    <> 
+    <>
       <div className="flex min-h-screen bg-gray-100">
         <div
           className="hidden lg:flex flex-col w-1/2 bg-cover bg-center "
@@ -77,11 +77,10 @@ export default function LogIn() {
         </div>
 
         <div className="flex flex-col justify-center px-4 lg:px-8 w-full max-w-md m-auto">
-          <div className="flex items-center justify-center mb-16">
+          {/* <div className="flex items-center justify-center mb-16">
             <span
-              className={`mr-4 text-lg font-bold transition-colors duration-500 ${
-                userType === "Admin" ? "glow text-blue-500" : "text-black"
-              }`}
+              className={`mr-4 text-lg font-bold transition-colors duration-500 ${userType === "Admin" ? "glow text-blue-500" : "text-black"
+                }`}
             >
               Admin
             </span>
@@ -94,13 +93,12 @@ export default function LogIn() {
               }
             />
             <span
-              className={`ml-4 text-lg font-bold transition-colors duration-500 ${
-                userType === "Restaurant" ? "glow text-blue-500" : "text-black"
-              }`}
+              className={`ml-4 text-lg font-bold transition-colors duration-500 ${userType === "Restaurant" ? "glow text-blue-500" : "text-black"
+                }`}
             >
               Restaurant
             </span>
-          </div>
+          </div> */}
           <h1 className="text-3xl font-bold mb-6">Login</h1>
           <form onSubmit={formik.handleSubmit}>
             <div className="mb-4">
@@ -148,7 +146,7 @@ export default function LogIn() {
 
             <p className="text-sm text-center text-gray-400 mt-4">
               You don't have an account?{" "}
-              <Link to="/signUp" className="text-indigo-400 hover:underline">
+              <Link to="/Vendor/signUp" className="text-indigo-400 hover:underline">
                 Register
               </Link>
             </p>
