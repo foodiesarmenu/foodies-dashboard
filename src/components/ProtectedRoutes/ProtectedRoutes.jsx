@@ -5,7 +5,7 @@ export default function ProtectedRoutes(props) {
     if (localStorage.getItem('accessToken')) {
         return props.children
     } else {
-        return <Navigate to={'/login'} />
+        return <Navigate to={'/Vendor/login'} />
     }
 
 
