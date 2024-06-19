@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Pagination, Card, Button } from 'flowbite-react';
+import { Table,  Card, Button } from 'flowbite-react';
 import axios from 'axios';
 import Loader from "../Loader/Loader";
 import { Component } from "../Breadcrumb/Breadcrumb";

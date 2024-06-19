@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiUser } from 'react-icons/hi';
 import { IoFastFood } from "react-icons/io5";
-import { MdMenuBook } from "react-icons/md";
+import { FaShippingFast } from "react-icons/fa";
 import { BiSolidOffer } from "react-icons/bi";
-import { IoMenu } from 'react-icons/io5';
+import { RiCoupon3Fill } from "react-icons/ri";
 import { IoRestaurantOutline } from "react-icons/io5";
 import TokenContext from "../../Context/userContext";
 export default function SideBar() {
@@ -34,7 +34,7 @@ export default function SideBar() {
     <>
       {isAdmin ? (
         <Sidebar aria-label="Sidebar with logo branding example" className="dark">
-          <Sidebar.Logo href="#" img="/favicon.svg" imgAlt="Flowbite logo">
+          <Sidebar.Logo href="#" img="https://res.cloudinary.com/dlvndc08a/image/upload/v1718310629/y92vywr8qfeybfndewjm.png" imgAlt="Flowbite logo">
             Foodies
           </Sidebar.Logo>
           <Sidebar.Items>
@@ -85,16 +85,16 @@ export default function SideBar() {
               <Sidebar.Item icon={HiUser}>
                 <Link to="/profile">Profile</Link>
               </Sidebar.Item>
-              <Sidebar.Item icon={IoMenu}>
+              <Sidebar.Item icon={IoFastFood}>
                 <Link to="/meals">meals</Link>
               </Sidebar.Item>
-              <Sidebar.Item icon={IoMenu}>
+              <Sidebar.Item icon={RiCoupon3Fill}>
                 <Link to="/coupon">coupon</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={BiSolidOffer}>
                 <Link to="/promotions">promotions</Link>
               </Sidebar.Item>
-              <Sidebar.Item icon={IoFastFood}>
+              <Sidebar.Item icon={FaShippingFast}>
                 <Link to="/Orders">Orders</Link>
               </Sidebar.Item>
               <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
