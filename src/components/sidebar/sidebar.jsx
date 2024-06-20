@@ -34,7 +34,7 @@ export default function SideBar() {
     <>
       {isAdmin ? (
         <Sidebar aria-label="Sidebar with logo branding example" className="dark">
-          <Sidebar.Logo href="#" img="https://res.cloudinary.com/dlvndc08a/image/upload/v1718310629/y92vywr8qfeybfndewjm.png" imgAlt="Flowbite logo">
+          <Sidebar.Logo img="https://res.cloudinary.com/dlvndc08a/image/upload/v1718310629/y92vywr8qfeybfndewjm.png" imgAlt="Flowbite logo">
             Foodies
           </Sidebar.Logo>
           <Sidebar.Items>
@@ -68,42 +68,42 @@ export default function SideBar() {
         </Sidebar>
       ) : <>
         <Sidebar aria-label="Sidebar with logo branding example" className="dark">
-          <Sidebar.Logo href="#" img="/favicon.svg" imgAlt="Flowbite logo">
-            Foodies
-          </Sidebar.Logo>
-          <Sidebar.Items>
-            <Sidebar.ItemGroup>
-              <Sidebar.Item href="#" icon={HiChartPie}>
-                <Link to="/">Dashboard</Link>
-              </Sidebar.Item>
-              {/* <Sidebar.Item icon={IoRestaurantOutline}>
+          <Sidebar.Logo img="https://res.cloudinary.com/dlvndc08a/image/upload/v1718310629/y92vywr8qfeybfndewjm.png" imgAlt="Flowbite logo">
+          Foodies
+        </Sidebar.Logo>
+        <Sidebar.Items>
+          <Sidebar.ItemGroup>
+            <Sidebar.Item href="#" icon={HiChartPie}>
+              <Link to="/">Dashboard</Link>
+            </Sidebar.Item>
+            {/* <Sidebar.Item icon={IoRestaurantOutline}>
                 <Link to="/restaurants"> Restaurant</Link>
               </Sidebar.Item>
               <Sidebar.Item href="#" icon={HiInbox}>
                 <Link to="/categories">Categories</Link>
               </Sidebar.Item> */}
-              <Sidebar.Item icon={HiUser}>
-                <Link to="/profile">Profile</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={IoFastFood}>
-                <Link to="/meals">meals</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={RiCoupon3Fill}>
-                <Link to="/coupon">coupon</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={BiSolidOffer}>
-                <Link to="/promotions">promotions</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={FaShippingFast}>
-                <Link to="/Orders">Orders</Link>
-              </Sidebar.Item>
-              <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
-                <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
-              </Sidebar.Item>
-            </Sidebar.ItemGroup>
-          </Sidebar.Items>
-        </Sidebar>
-      </>}
+            <Sidebar.Item icon={HiUser}>
+              <Link to="/profile">Profile</Link>
+            </Sidebar.Item>
+            <Sidebar.Item icon={IoFastFood}>
+              <Link to="/meals">meals</Link>
+            </Sidebar.Item>
+            <Sidebar.Item icon={RiCoupon3Fill}>
+              <Link to="/coupon">coupon</Link>
+            </Sidebar.Item>
+            <Sidebar.Item icon={BiSolidOffer}>
+              <Link to="/promotions">promotions</Link>
+            </Sidebar.Item>
+            <Sidebar.Item icon={FaShippingFast}>
+              <Link to="/Orders">Orders</Link>
+            </Sidebar.Item>
+            <Sidebar.Item icon={HiArrowSmRight} className="mt-auto">
+              <Button onClick={handleLogout} className="w-full" color={'failure'}>Logout</Button>
+            </Sidebar.Item>
+          </Sidebar.ItemGroup>
+        </Sidebar.Items>
+      </Sidebar>
+    </>}
     </>
   );
 }
