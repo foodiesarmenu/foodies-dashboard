@@ -25,7 +25,7 @@ export default function SignUpAdmin() {
             setIsLoading(false);
 
             if (data.success === true)
-                navigate('/login');
+                navigate('/Admin/login');
         } catch (error) {
             console.log(error, 'error');
             setApiError(error.response ? error.response.data.message : 'An error occurred');
