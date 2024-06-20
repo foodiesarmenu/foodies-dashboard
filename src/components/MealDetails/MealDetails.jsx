@@ -156,7 +156,7 @@ export default function MealDetails() {
 
   return (
     <div className="grid grid-cols-4 gap-4 ">
-      <div className="bg-gray-200 shadow-lg p-5 rounded">
+      <div className="bg-gray-800 shadow-lg p-5 rounded">
         <img src={meal.image} alt="Meal" className="w-full h-auto rounded" />
         <div id="fileUpload" className="max-w-md">
           <div className="mb-2 block">
@@ -169,7 +169,7 @@ export default function MealDetails() {
           />
         </div>
       </div>
-      <div className="p-5 col-span-2 text-2xl bg-gray-200 rounded relative">
+      <div className="p-5 col-span-2 text-2xl bg-gray-800 rounded relative">
         <DeleteModalForAll handleDelete={handleDelete} />
 
         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit}>

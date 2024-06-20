@@ -188,7 +188,7 @@ export default function RestaurantCoupon() {
               coupons.map((coupon, index) => (
                 <Card
                   key={index}
-                  className="relative p-4 border w-75 border-gray-300 bg-white rounded mt-4 mb-4"
+                  className="dark:bg-white relative p-4 border w-75 border-gray-300 bg-white rounded mt-4 mb-4"
                 >
                   <div className="flex">
                     <h2 className="text-xl mt-1 font-bold">Coupon Code: {coupon.code}</h2>
