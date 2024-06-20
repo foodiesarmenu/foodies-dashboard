@@ -36,7 +36,7 @@ export default function Restaurants() {
 
     const fetchCategories = async () => {
         try {
-            const { data } = await axios.get('https://foodies-backend-1.onrender.com/dashboard/admin/category', {
+            const { data } = await axios.get('https://foodies-backend-1.onrender.com/dashboard/admin/category?limit=20', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }

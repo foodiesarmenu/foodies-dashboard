@@ -21,7 +21,7 @@ function SignUp() {
         });
         formData.append('image', imageFile);
         try {
-            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/admin', formData);
+            const { data } = await axios.post('https://foodies-backend-1.onrender.com/dashboard/restaurant', formData);
             setIsLoading(false);
 
             if (data.success === true)
