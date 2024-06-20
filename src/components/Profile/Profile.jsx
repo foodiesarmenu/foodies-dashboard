@@ -5,16 +5,16 @@ import {
   Button,
   Label,
   TextInput,
-  Toast,
   Select,
 } from "flowbite-react";
-import { HiPencil, HiOutlineCheck, HiCheck } from "react-icons/hi";
+import { HiPencil, HiOutlineCheck, } from "react-icons/hi";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import React, { useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import TokenContext from "../../Context/userContext";
-
+import SuccessToast from "../Toast/success";
+import ErrorToast from "../Toast/error";
 export default function Profile() {
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -113,18 +113,14 @@ export default function Profile() {
       ) : (
         <>
           {showSuccessToast && (
-            <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
-              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500 dark:bg-green-800 dark:text-green-200">
-                <HiCheck className="h-5 w-5" />
-              </div>
-              <div className="ml-3 text-sm font-normal">
-                Updated successfully.
-              </div>
-              <Toast.Toggle onClick={() => setShowSuccessToast(false)} />
-            </Toast>
+            <SuccessToast setShowSuccessToast={setShowSuccessToast} message={'Profile Updated Successfully'} />
           )}
 
           {showErrorToast && (
+            <ErrorToast setShowErrorToast={setShowErrorToast} message={'Failed To Update'} />
+          )}
+
+          {/* {showErrorToast && (
             <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
               <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
                 <HiCheck className="h-5 w-5" />
@@ -132,17 +128,7 @@ export default function Profile() {
               <div className="ml-3 text-sm font-normal">Update failed.</div>
               <Toast.Toggle onClick={() => setShowErrorToast(false)} />
             </Toast>
-          )}
-
-          {showErrorToast && (
-            <Toast className="fixed top-6 left-1/2 transform -translate-x-1/2">
-              <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-500 dark:bg-red-800 dark:text-red-200">
-                <HiCheck className="h-5 w-5" />
-              </div>
-              <div className="ml-3 text-sm font-normal">Update failed.</div>
-              <Toast.Toggle onClick={() => setShowErrorToast(false)} />
-            </Toast>
-          )}
+          )} */}
           <div className="flex justify-between mb-5">
             <div className="col-md-6">
               <Avatar

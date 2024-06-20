@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import React, { createContext, useEffect, useState } from "react";
+
 const TokenContext = createContext();
 
 export const TokenContextProvider = (props) => {
@@ -7,26 +8,27 @@ export const TokenContextProvider = (props) => {
     const [user, setUser] = useState(null);
     const [userType, setUserType] = useState(null);
 
-
     useEffect(() => {
-        console.log('asd');
-        if (localStorage.getItem('accessToken')) {
-            setToken(localStorage.getItem('accessToken'))
-            const decoded = jwtDecode(localStorage.getItem('accessToken'));
-            setUserType(decoded.type)
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            setToken(token);
+            const decoded = jwtDecode(token);
+            setUser(decoded);
+            setUserType(decoded.type);
         }
-
     }, []);
 
-    function getUserData() {
-        if (localStorage.getItem('accessToken')) {
-            setToken(localStorage.getItem('accessToken'))
-            const decoded = jwtDecode(localStorage.getItem('accessToken'));
-            setUser(decoded)
-            setUserType(decoded.type)
+    const getUserData = async () => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            setToken(token);
+            const decoded = jwtDecode(token);
+            setUser(decoded);
+            setUserType(decoded.type);
+            return decoded;
         }
-
-    }
+        return null;
+    };
 
     return (
         <TokenContext.Provider value={{ token, setToken, user, setUser, userType, setUserType, getUserData }}>
