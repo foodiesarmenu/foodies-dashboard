@@ -24,7 +24,7 @@ export default function Profile() {
   const [showErrorToast, setShowErrorToast] = useState(false);
 
   const { userType } = useContext(TokenContext);
-  let type = userType || "Admin";
+  let type = userType;
 
 
   const fetchProfile = async () => {
@@ -154,10 +154,10 @@ export default function Profile() {
                 size="xl"
               >
                 <div className="space-y-1 font-medium dark:text-white">
-                  <div className="text-white text-3xl">{profileData.name}</div>
+                  <div className="text-white text-3xl">{profileData?.name}</div>
                   <div className="text-sm text-gray-500 dark:text-gray-400 text-l">
                     Joined in{" "}
-                    {new Date(profileData.createdAt).toLocaleDateString()}
+                    {new Date(profileData?.createdAt).toLocaleDateString()}
                   </div>
                 </div>
               </Avatar>
@@ -189,9 +189,9 @@ export default function Profile() {
               <TextInput
                 type="text"
                 id="disabledInput1"
-                placeholder={profileData.email}
+                placeholder={profileData?.email}
                 disabled={isDisabled}
-                value={formData.email}
+                value={formData?.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
@@ -202,9 +202,9 @@ export default function Profile() {
               <TextInput
                 type="text"
                 id="disabledInput3"
-                placeholder={profileData.phoneNumber}
+                placeholder={profileData?.phoneNumber}
                 disabled={isDisabled}
-                value={formData.phoneNumber}
+                value={formData?.phoneNumber}
                 onChange={(e) =>
                   setFormData({ ...formData, phoneNumber: e.target.value })
                 }
@@ -215,7 +215,7 @@ export default function Profile() {
               <Select
                 disabled={isDisabled}
                 label={formData.gender}
-                value={formData.gender}
+                value={formData?.gender}
                 onChange={(e) =>
                   setFormData({ ...formData, gender: e.target.value })
                 }

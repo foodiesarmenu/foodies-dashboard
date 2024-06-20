@@ -28,7 +28,7 @@ export default function RestaurantCoupon() {
     }
     try {
       const response = await axios.post(
-        `http://localhost:4000/dashboard/admin/Coupon`,
+        `https://foodies-backend-1.onrender.com/dashboard/admin/Coupon`,
         {
           ...values,
           restaurant: user.user._id,
@@ -52,7 +52,7 @@ export default function RestaurantCoupon() {
     const getCoupons = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/dashboard/admin/Coupon/restaurant/${user.user._id}`,
+          `https://foodies-backend-1.onrender.com/dashboard/admin/Coupon/restaurant/${user.user._id}`,
           {
             headers: {
               Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWJlMmM2YTcyMGYwMDJmZDI0YzY5MmEiLCJlbWFpbCI6ImVoYWJAZ21haWwuY29tIiwiY291bnRyeUNvZGUiOiIyMCIsInBob25lTnVtYmVyIjoiMDExNTcwMDMzNjAiLCJ0eXBlIjoiQWRtaW4iLCJpYXQiOjE3MDcwNjg1MDcsImV4cCI6MTczODYyNjEwN30.QzgNEv3fa7xNhST7ap1M5-ogRY20Rgu3549DbO972jlF_xhIiME56GMuROPlXNqcMMA-sWyEe-BFQvAE0FHODCZnH0g1b_iHjS8XBHSmgzrwiDxoiDNGqLxtv2-uFWegkevaItk10Rb43dwKDwUQV4M_EuPnDFZnx8QbLRuJmUkpSy08wcQCIPNZBFfqCtYOxv4hKrhDXx3i9yvvXBdVCT0O_rpGFCivqbtTSyjovzgYIHlTnKstrt1QojKTyKCsEYGuiPnDKZbJI70zLFgrKcoI889k6PynSBwOyP1GURmQfxyr8o9_siTxbzJCgTbnAisXD0F5urm3G5bNOyyiPg`,

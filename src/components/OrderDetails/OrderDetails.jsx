@@ -17,7 +17,7 @@ export default function OrderDetails() {
     const limit = 10;
     const skip = (page - 1) * limit;
     try {
-      const { data } = await axios.get(`http://localhost:3000/dashboard/vendor/order/${orderId}`, {
+      const { data } = await axios.get(`https://foodies-backend-1.onrender.com/dashboard/vendor/order/${orderId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -34,7 +34,7 @@ export default function OrderDetails() {
     try {
       console.log(`Bearer ${localStorage.getItem('accessToken')}`);
       setButtonIsLoading(true);
-      const { data } = await axios.patch(`http://localhost:3000/dashboard/vendor/order/${orderId}`, {}, {
+      const { data } = await axios.patch(`https://foodies-backend-1.onrender.com/dashboard/vendor/order/${orderId}`, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }

@@ -1,25 +1,27 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { IoMdAddCircle } from "react-icons/io";
 import { Modal, Button } from "flowbite-react";
 import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
 import AddMeal from "../AddMeal/AddMeal";
+import TokenContext from "../../Context/userContext";
 
 export default function Meals() {
   const [menu, setMenu] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [tags, setTags] = useState([])
 
-
+  const { user } = useContext(TokenContext)
+  console.log(user, 'asdasdasdasdasdasdasdasd');
   const fetchMenu = async () => {
     try {
       setIsLoading(true);
 
       const { data } = await axios.get(
-        // els7 en el id yb2a el id ely 3amel be login
-        `https://foodies-backend-1.onrender.com/mobile/restaurant/menu/65ee39a0b3eac564b5db7a81`,
+
+        `https://foodies-backend-1.onrender.com/mobile/restaurant/menu/${user?._id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -25,7 +25,7 @@ export default function Order() {
         const limit = 10;
         const skip = (page - 1) * limit;
         try {
-            const { data } = await axios.get(`http://localhost:3000/dashboard/vendor/order?order=desc`, {
+            const { data } = await axios.get(`https://foodies-backend-1.onrender.com/dashboard/vendor/order?order=desc`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -33,6 +33,7 @@ export default function Order() {
             setOrders(data.data);
             setCurrentPage(data.currentPage);
             setNumberOfPages(data.numberOfPages);
+            console.log(data);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -92,7 +93,7 @@ export default function Order() {
                                 </CardBody>
                                 <CardFooter>
                                     <p className="font-normal text-gray-700 mb-3">
-                                        <strong>Total Price:</strong> {order?.totalPriceAfterDiscount}
+                                        <strong>Total Price:</strong> {order?.totalPriceAfterDiscount ? order?.totalPriceAfterDiscount : order?.cartTotalPrice}
                                     </p>
                                     <Button color="warning"><Link to={`/order/${order._id}/details`} color="warning">View</Link>
                                     </Button>
