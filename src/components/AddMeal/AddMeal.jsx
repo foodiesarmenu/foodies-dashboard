@@ -67,6 +67,9 @@ export default function AddMeal({ tags }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!formData.rate) {
+      setFormData({ ...formData, rate: 0 });
+    }
     console.log(formData);
     const data = new FormData();
     console.log(data, "data");
@@ -202,18 +205,6 @@ export default function AddMeal({ tags }) {
                   />
                 </div>
               </div>
-              <div>
-                <Label htmlFor="rate" value="rate" />
-                <TextInput
-                  id="rate"
-                  type="number"
-                  placeholder="rate"
-                  defaultValue="rate"
-                  value={formData.rate}
-                  onChange={handleChange}
-                />
-              </div>
-
               <div className="mb-2 block">
                 <Label htmlFor="tags" value="Select your Tags" required />
               </div>

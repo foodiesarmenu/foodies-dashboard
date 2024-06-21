@@ -151,7 +151,7 @@ export default function RestaurantCoupon() {
                         type="text"
                         name="code"
                         placeholder="Coupon Code"
-                        className={`w-full p-2 border ${errors.code && touched.code ? 'border-red-500' : 'border-gray-300'} rounded`}
+                        className={`text-black w-full p-2 border ${errors.code && touched.code ? 'border-red-500' : 'border-gray-300'} rounded`}
                       />
                       <ErrorMessage name="code" component="div" className="text-red-500" />
                     </div>
@@ -159,7 +159,7 @@ export default function RestaurantCoupon() {
                       <Field
                         type="date"
                         name="expires"
-                        className={`w-full p-2 border ${errors.expires && touched.expires ? 'border-red-500' : 'border-gray-300'} rounded`}
+                        className={`w-full text-black p-2 border ${errors.expires && touched.expires ? 'border-red-500' : 'border-gray-300'} rounded`}
                       />
                       <ErrorMessage name="expires" component="div" className="text-red-500" />
                     </div>
@@ -168,7 +168,7 @@ export default function RestaurantCoupon() {
                         type="number"
                         name="discount"
                         placeholder="Discount"
-                        className={`w-full p-2 border ${errors.discount && touched.discount ? 'border-red-500' : 'border-gray-300'} rounded`}
+                        className={`w-full text-black p-2 border ${errors.discount && touched.discount ? 'border-red-500' : 'border-gray-300'} rounded`}
                       />
                       <ErrorMessage name="discount" component="div" className="text-red-500" />
                     </div>

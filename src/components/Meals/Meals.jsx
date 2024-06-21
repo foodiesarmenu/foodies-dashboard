@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { FaArrowRight } from "react-icons/fa";
-import { Modal, Button } from "flowbite-react";
+import { FaArrowRight, FaStar } from "react-icons/fa";
 import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
 import AddMeal from "../AddMeal/AddMeal";
@@ -11,9 +10,9 @@ import AddFirstMeal from "../AddFirstMeal/AddFirstMeal";
 export default function Meals() {
   const [menu, setMenu] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState([]);
 
-  const { user } = useContext(TokenContext)
+  const { user } = useContext(TokenContext);
   const fetchMenu = async () => {
     try {
       setIsLoading(true);
@@ -25,8 +24,9 @@ export default function Meals() {
           },
         }
       );
-      const names = data.data.map(item => item.name);
-      setTags(names)
+      const names = data.data.map((item) => item.name);
+      setTags(names);
+      console.log(data.data);
       setMenu(data.data);
       setIsLoading(false);
     } catch (error) {
@@ -50,11 +50,13 @@ export default function Meals() {
   return (
     <>
       <div>
-      {menu.length === 0 ? (
-        <div className="flex flex-col justify-center items-center">
-          <p className="text-lg text-gray-200 mb-4">There are no meals available. Please add your first meal.</p>
-          <AddFirstMeal className="bg-black" tags={tags} />
-        </div>
+        {menu.length === 0 ? (
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-lg text-gray-200 mb-4">
+              There are no meals available. Please add your first meal.
+            </p>
+            <AddFirstMeal className="bg-black" tags={tags} />
+          </div>
         ) : (
           menu.map((category) => (
             <div key={category._id} className="group p-4 rounded-lg">

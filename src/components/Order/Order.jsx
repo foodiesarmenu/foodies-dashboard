@@ -54,10 +54,10 @@ export default function Order() {
         ) : (
           <Table
             hoverable={true}
-            className="w-full bg-gray-200 shadow-md rounded-lg"
+            className="w-full bg-gray-900 shadow-md  border-l border-r border-2 border-gray-700 " // Corrected for  borders
           >
-            <Table.Head className="bg-gray-800">
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+            <Table.Head className="text-white">
+              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium dark:text-white uppercase tracking-wider">
                 #
               </Table.HeadCell>
               <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
@@ -85,7 +85,7 @@ export default function Order() {
             <Table.Body>
               {Orders.map((order, index) => (
                 <React.Fragment key={order._id}>
-                  <Table.Row className="border-t border-gray-200">
+                  <Table.Row className="border-t border-gray-200 text-white">
                     <Table.Cell>{index + 1}</Table.Cell>
                     <Table.Cell className="text-bold">{order._id}</Table.Cell>
                     <Table.Cell>{order?.userId?.name}</Table.Cell>
@@ -98,7 +98,7 @@ export default function Order() {
                     <Table.Cell>
                       {new Date(order.createdAt).toLocaleString()}
                     </Table.Cell>
-                    <Table.Cell className="text-black font-bold">
+                    <Table.Cell className="font-bold">
                       {order?.totalPriceAfterDiscount
                         ? order?.totalPriceAfterDiscount
                         : order?.cartTotalPrice}{" "}

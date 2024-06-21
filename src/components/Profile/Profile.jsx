@@ -5,9 +5,10 @@ import {
   Button,
   Label,
   TextInput,
-  Select,
+  Textarea,
+  ToggleSwitch,
 } from "flowbite-react";
-import { HiPencil, HiOutlineCheck, } from "react-icons/hi";
+import { HiPencil, HiOutlineCheck } from "react-icons/hi";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import React, { useContext, useEffect, useState } from "react";
@@ -25,7 +26,6 @@ export default function Profile() {
 
   const { userType } = useContext(TokenContext);
   let type = userType;
-
 
   const fetchProfile = async () => {
     const token = localStorage.getItem("accessToken");
@@ -63,7 +63,7 @@ export default function Profile() {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            Authorization: `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWhhYlRhcmVrQWRtaW4iLCJfaWQiOiI2NjE5YjQ1OGU3MjE1YWFjMGZmMDQ5NDUiLCJpbWFnZSI6Imh0dHA6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZGx2bmRjMDhhL2ltYWdlL3VwbG9hZC92MTcxMjk2MDU5OC9wcm9maWxlL3N5aXRneWh6aXlkN2Z0cmFhcWt6LmpwZyIsImVtYWlsIjoiRWhhYlRhcmVrQWRtaW5AZ21haWwuY29tIiwiY291bnRyeUNvZGUiOiIyMCIsInBob25lTnVtYmVyIjoiMDExNTcwMDMzNTAiLCJ0eXBlIjoiQWRtaW4iLCJpYXQiOjE3MTkwMDgzMDksImV4cCI6MTc1MDU2NTkwOX0.UaAmPHHb_DzpdN3w5dBvSq9aGjasIAnhibQH0hCTlCPT5RY_OGjKxFEbhEgRfhZ86VeEUHJYui0414KXHrUTjoxTbOy-wJLLcu5dKRN1F01-XkoXli_WzBGBT4Jxak5FjscjTsuqVKVAhM-P-eKc_yU4EWjGFKuorS5QBRAsYPzeew9wPOQAa-pkXY3WWGk9_Jr3lpUiXNBrojQlFQYxFl9-GSB76GQeIuTArlgB9SNVxVE0wlureWfkPpbALe4cwCGL-iQAfRHKL2NhHSV5F-z15F6YIk_X9i5_U2rruJsi-0DamFjypCFyxkHg6ygyDaCzQF4nybkloIb55IFLTA`,
           },
         }
       );
@@ -90,8 +90,8 @@ export default function Profile() {
         email: profileData.email,
         address: profileData.address,
         phoneNumber: profileData.phoneNumber,
-        gender: profileData.gender,
-        dateOfBirth: profileData.dateOfBirth,
+        description: profileData.description,
+        canDeliver: profileData.canDeliver,
       });
     }
   }, [profileData]);
@@ -113,11 +113,17 @@ export default function Profile() {
       ) : (
         <>
           {showSuccessToast && (
-            <SuccessToast setShowSuccessToast={setShowSuccessToast} message={'Profile Updated Successfully'} />
+            <SuccessToast
+              setShowSuccessToast={setShowSuccessToast}
+              message={"Profile Updated Successfully"}
+            />
           )}
 
           {showErrorToast && (
-            <ErrorToast setShowErrorToast={setShowErrorToast} message={'Failed To Update'} />
+            <ErrorToast
+              setShowErrorToast={setShowErrorToast}
+              message={"Failed To Update"}
+            />
           )}
 
           {/* {showErrorToast && (
@@ -167,49 +173,98 @@ export default function Profile() {
               </Button>
             </div>
           </div>
-          <div className="container gap-4">
-            <div className="flex max-w-md flex-col gap-4">
-              <Label className="text-white text-xl" htmlFor="disabledInput1">
-                Email
-              </Label>
-              <TextInput
-                type="text"
-                id="disabledInput1"
-                placeholder={profileData?.email}
-                disabled={isDisabled}
-                value={formData?.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-              />
-              <Label className="text-white text-xl" htmlFor="disabledInput3">
-                Phone
-              </Label>
-              <TextInput
-                type="text"
-                id="disabledInput3"
-                placeholder={profileData?.phoneNumber}
-                disabled={isDisabled}
-                value={formData?.phoneNumber}
-                onChange={(e) =>
-                  setFormData({ ...formData, phoneNumber: e.target.value })
-                }
-              />
-              <Label className="text-white text-xl" htmlFor="genderSelect">
-                Gender
-              </Label>
-              <Select
-                disabled={isDisabled}
-                label={formData.gender}
-                value={formData?.gender}
-                onChange={(e) =>
-                  setFormData({ ...formData, gender: e.target.value })
-                }
-                dismissOnClick={false}
-              >
-                <option>Male</option>
-                <option>Female</option>
-              </Select>
+          <div className="container col-2  gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <Label className="text-white text-xl" htmlFor="disabledInput1">
+                  Email
+                </Label>
+                <TextInput
+                  type="text"
+                  className="mt-3"
+                  id="disabledInput1"
+                  placeholder={profileData?.email}
+                  disabled={isDisabled}
+                  value={formData?.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label className="text-white text-xl" htmlFor="disabledInput3">
+                  Phone
+                </Label>
+                <TextInput
+                  type="text"
+                  className="mt-3"
+                  id="disabledInput3"
+                  placeholder={profileData?.phoneNumber}
+                  disabled={isDisabled}
+                  value={formData?.phoneNumber}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phoneNumber: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label className="text-white text-xl" htmlFor="address">
+                  Address
+                </Label>
+                <TextInput
+                  type="text"
+                  className="mt-3"
+                  id="address"
+                  placeholder={profileData?.address}
+                  disabled={isDisabled}
+                  value={formData?.address}
+                  onChange={(e) =>
+                    setFormData({ ...formData, address: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label className="text-white text-xl" htmlFor="canDeliver">
+                  Can Deliver
+                </Label>
+                <div className="mt-3">
+                  <ToggleSwitch
+                    id="canDeliver"
+                    checked={formData?.canDeliver} // Ensure this reflects the current state from formData
+                    onChange={(newValue) =>
+                      setFormData({ ...formData, canDeliver: newValue })
+                    }
+                    disabled={isDisabled}
+                  />
+                </div>
+              </div>
+              <div className="lg:col-span-2">
+                <Label className="text-white text-xl " htmlFor="description">
+                  description
+                </Label>
+                <Textarea
+                  type="text"
+                  className="mt-3 h-32"
+                  id="description"
+                  placeholder={profileData?.description}
+                  disabled={isDisabled}
+                  value={formData?.description}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <Label className="text-white text-xl" htmlFor="qrCode">
+                  Resturant QR Code
+                </Label>
+                <img
+                  id="qrCode"
+                  src={profileData?.qrCode}
+                  alt="QR Code"
+                  className="w-32 h-32 mt-2" // Adjust width and height as needed
+                />
+              </div>
             </div>
           </div>
         </>

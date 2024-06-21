@@ -4,6 +4,7 @@ import axios from "axios";
 import Loader from "../Loader/Loader";
 import { Component } from "../Breadcrumb/Breadcrumb";
 import { Link } from "react-router-dom";
+import Order from "./Order";
 
 export default function OrderPage() {
   const [Orders, setOrders] = useState([]);
@@ -50,74 +51,7 @@ export default function OrderPage() {
         <div className="flex justify-between mb-8">
           <Component second="Dashboard" third="Orders" />
         </div>
-
-        {isLoading ? (
-          <div className="flex justify-center items-center h-96">
-            <Loader />
-          </div>
-        ) : (
-          <Table
-            hoverable={true}
-            className="w-full bg-gray-200 shadow-md rounded-lg"
-          >
-            <Table.Head className="bg-gray-800">
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                #
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                Order ID
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                User
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                Adderss
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                Payment Method
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                Created At
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                Total Price
-              </Table.HeadCell>
-              <Table.HeadCell className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                Actions
-              </Table.HeadCell>
-            </Table.Head>
-            <Table.Body>
-              {Orders.map((order, index) => (
-                <React.Fragment key={order._id}>
-                  <Table.Row className="border-t border-gray-200">
-                    <Table.Cell>{index + 1}</Table.Cell>
-                    <Table.Cell className="text-bold">{order._id}</Table.Cell>
-                    <Table.Cell>{order?.userId?.name}</Table.Cell>
-                    <Table.Cell>
-                      {order?.deliveryAddress?.firstAddress},
-                    </Table.Cell>
-                    <Table.Cell>
-                      {order?.paymentMethod}
-                    </Table.Cell>
-                    <Table.Cell>
-                      {new Date(order.createdAt).toLocaleString()}
-                    </Table.Cell>
-                    <Table.Cell className="text-black font-bold">
-                      {order?.totalPriceAfterDiscount
-                        ? order?.totalPriceAfterDiscount
-                        : order?.cartTotalPrice}{" "}
-                      EGP
-                    </Table.Cell>
-                    <Table.Cell>
-                    <Button color="warning"><Link to={`/order/${order._id}/details`} color="warning">View</Link>
-                    </Button>
-                    </Table.Cell>
-                  </Table.Row>
-                </React.Fragment>
-              ))}
-            </Table.Body>
-          </Table>
-        )}
+        <Order />
       </div>
       <div className="flex overflow-x-auto sm:justify-center mt-4">
         <Pagination

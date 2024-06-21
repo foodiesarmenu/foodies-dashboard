@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { FaArrowRight, FaStar } from "react-icons/fa";
+
 import { FileInput, Label, Button, TextInput } from "flowbite-react";
 import { DeleteModalForAll } from "../DelteModalForAll/DelteModalForAll";
 import { useNavigate } from "react-router-dom";
@@ -63,11 +65,13 @@ export default function MealDetails() {
           fat: data.data.fat,
           carbohydrates: data.data.carbohydrates,
           calories: data.data.calories,
-          sizes: data.data.sizes.map((size) => ({ size: size.size, price: size.price })),
+          sizes: data.data.sizes.map((size) => ({
+            size: size.size,
+            price: size.price,
+          })),
           // image: data.data.image,
         });
       }
-
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -83,7 +87,6 @@ export default function MealDetails() {
       sizes: prevState.sizes.map((sizeObj) =>
         sizeObj.size === id ? { ...sizeObj, price: value } : sizeObj
       ),
-
     }));
   };
 
@@ -168,6 +171,24 @@ export default function MealDetails() {
             onChange={handleFileChange}
           />
         </div>
+        <div className="mt-2">
+          <h1 className="text-2xl mt-3 text-white">Meal rating</h1>
+          <div className="flex mt-2">
+            {[...Array(5)].map((star, index) => {
+              const ratingValue = index + 1;
+              return (
+                <FaStar
+                  key={index}
+                  className={`${
+                    ratingValue <= Math.ceil(meal.rate)
+                      ? "text-yellow-500"
+                      : "text-gray-300"
+                  }`}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
       <div className="p-5 col-span-2 text-2xl bg-gray-800 rounded relative">
         <DeleteModalForAll handleDelete={handleDelete} />
@@ -248,21 +269,22 @@ export default function MealDetails() {
                   type="text"
                   placeholder={meal.calories}
                   defaultValue={meal.calories}
-
                   onChange={handleChange}
                 />
               </div>
-
             </div>
-            <div >
+            <div>
               <Label htmlFor="sizes" value="Sizes" />
               <div className="grid grid-cols-3 gap-3 ">
                 {formData.sizes.map((sizeObj, index) => (
                   <div key={index}>
-                    <Label htmlFor={sizeObj.size} value={`Size: ${sizeObj.size}`} />
+                    <Label
+                      htmlFor={sizeObj.size}
+                      value={`Size: ${sizeObj.size}`}
+                    />
                     <TextInput
                       id={sizeObj.size}
-                      type='number'
+                      type="number"
                       placeholder={`Price for ${sizeObj.size}`}
                       defaultValue={sizeObj.price}
                       onChange={handleChange}
@@ -273,9 +295,7 @@ export default function MealDetails() {
             </div>
           </div>
           <Button type="submit" onClick={handleSubmit}>
-            {
-              isLoading ? <i className='fa fa-spin fa-spinner'></i> : 'Update'
-            }
+            {isLoading ? <i className="fa fa-spin fa-spinner"></i> : "Update"}
           </Button>
         </form>
       </div>
