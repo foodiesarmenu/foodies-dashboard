@@ -24,6 +24,7 @@ import ResturantCoupon from "./components/ResturantCoupon/ResturantCoupon";
 import Order from "./components/Order/Order";
 import LogInAmin from "./components/loginAdmin/loginAdmin";
 import SignUpAdmin from "./components/signUpAdmin/signUpAdmin";
+import OrderPage from "./components/Order/OrderPage";
 
 
 
@@ -119,7 +120,7 @@ export default function App() {
         {
           path: 'orders', element:
             <ProtectedRoutes>
-              <Order />
+              <OrderPage />
             </ProtectedRoutes>
         },
         {

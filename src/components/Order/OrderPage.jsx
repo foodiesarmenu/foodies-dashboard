@@ -5,7 +5,7 @@ import Loader from "../Loader/Loader";
 import { Component } from "../Breadcrumb/Breadcrumb";
 import { Link } from "react-router-dom";
 
-export default function Order() {
+export default function OrderPage() {
   const [Orders, setOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -45,10 +45,14 @@ export default function Order() {
   };
 
   return (
-    <div className="container mt-2 mx-auto w-full">
-      <div className="">
+    <div className="container mx-auto px-4 sm:px-8">
+      <div className="py-8">
+        <div className="flex justify-between mb-8">
+          <Component second="Dashboard" third="Orders" />
+        </div>
+
         {isLoading ? (
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center h-96">
             <Loader />
           </div>
         ) : (
@@ -114,6 +118,14 @@ export default function Order() {
             </Table.Body>
           </Table>
         )}
+      </div>
+      <div className="flex overflow-x-auto sm:justify-center mt-4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={numberOfPages}
+          onPageChange={onPageChange}
+          showIcons
+        />
       </div>
     </div>
   );
